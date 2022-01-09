@@ -5,7 +5,8 @@ export default class Sidebar {
         minScrollbarLength: 20
     }
     sidebarInit() {
-        const ps  = new PerfectScrollbar('.customizer__sidebar', this.sidebarSettings );
+        console.log(  )
+        const ps  = new PerfectScrollbar('.customizer__sidebar--content', this.sidebarSettings );
         this.sidebarSettings.ps = ps;
     }
 

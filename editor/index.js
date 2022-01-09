@@ -1,2 +1,2 @@
-(()=>{"use strict";class s{sidebarInit(){console.log("hell world")}}class t extends(Object.assign(s)){constructor(){super(),window.addEventListener("DOMContentLoaded",this.init.bind(this))}init(){this.sidebarInit()}}new t})();
+(()=>{"use strict";class e{sidebarSettings={wheelSpeed:2,wheelPropagation:!0,minScrollbarLength:20};sidebarInit(){console.log();const e=new PerfectScrollbar(".customizer__sidebar--content",this.sidebarSettings);this.sidebarSettings.ps=e}}class t extends(Object.assign(e)){constructor(){super(),window.addEventListener("DOMContentLoaded",this.init.bind(this))}init(){this.sidebarInit()}}new t})();
 //# sourceMappingURL=index.js.map
