@@ -52,6 +52,7 @@
             border-radius: 4px;
             cursor: move;
             user-select: none;
+            position: relative;
 
             &:hover {
                 box-shadow: -1px 3px 9px #bbb3b3;

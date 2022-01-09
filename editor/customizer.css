@@ -97,6 +97,7 @@
 	border-radius: 4px;
 	cursor: move;
 	user-select: none;
+	position: relative;
 }
 
 .customizer .customizer__sidebar--content .popup-widget:hover {
@@ -122,5 +123,6 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background: #999;
 	min-height: calc(100vh - 50px);
 }
