@@ -1,0 +1,2 @@
+(()=>{"use strict";const t=new class extends class{settings={init:this.frontendInit.bind(this)};frontendInit(t){this.settings.config=t,this.init()}constructor(){window.onload=()=>{window.dispatchEvent(new CustomEvent("popup/init"))}}}{init(){console.log(this.settings.config)}};window.popup=t.settings})();
+//# sourceMappingURL=index.js.map
