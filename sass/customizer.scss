@@ -1,0 +1,35 @@
+@import './utils/variables';
+@import './utils/functions';
+@import './utils/mixins';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.customizer {
+
+    &__header {
+        padding: 5px 10px;
+        text-align: right;
+        background-color: css_var('primary_color');
+        button {
+            padding: 7px 20px;
+            background: css_var('white_color');
+            font-size: 15px;
+            border-radius: 4px;
+            border: 0px;
+        }
+    }
+
+    &__sidebar {
+        float: left;
+        width: 400px;
+    }
+
+    &__content {
+        float: left;
+        width: calc(100vw - 400px);
+    }
+}

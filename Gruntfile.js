@@ -14,7 +14,7 @@ module.exports = grunt => {
 	const projectConfig = {
 		name: 'popup-host', 						// should be the text domain of the project (todo: spilt it)
 		srcDir: './', 								// the source directory of the plugin
-		distDir: './build/build/',					// where to save the built files
+		distDir: './build/',					// where to save the built files
 		enableLint:	false, 							// ignore the linting (coding standard checking) during 'build' task (true/ false)
         version: '1.0.0'
 	};
@@ -28,19 +28,24 @@ module.exports = grunt => {
         sass : [
             {
                 cwd: 'sass/',
-                src: ['*.scss', '!_*.scss'],
+                src: ['popup.scss', '!_*.scss'],
                 dest: 'public/'
+            },
+            {
+                cwd: 'sass/',
+                src: ['customizer.scss', '!_*.scss'],
+                dest: 'editor/'
             }
         ],
 
 		ts: [
 			{
-				cwd: './',
+				cwd: 'src/',
 				src: [ 'popup.js'],
 				dest: 'public/',
 			},
 			{
-				cwd: './',
+				cwd: 'src/',
 				src: [ 'customizer.js' ],
 				dest: 'editor/',
 			},
@@ -59,11 +64,11 @@ module.exports = grunt => {
         // grunt watch files
         watch: {
 			sass: {
-				files: [ projectConfig.srcDir + '**/*.scss', '!' + projectConfig.srcDir + 'node_modules' ],
+				files: [ projectConfig.srcDir + '**/sass/**/*.scss', '!' + projectConfig.srcDir + 'node_modules' ],
 				tasks: [ 'sass', (projectConfig.enableLint ? 'stylelint' : 'screen:noLintError') ] // assign watch task
 			},
 			js: {
-				files: [ projectConfig.srcDir + '**/*.js', '!' + projectConfig.srcDir + 'node_modules' ],
+				files: [ projectConfig.srcDir + '**/src/**/*.js', '!' + projectConfig.srcDir + 'node_modules' ],
 				tasks: [ 'ts', ( projectConfig.enableLint ? 'stylelint' : 'screen:noLintError' ) ] // assign watch task
 			},
 		},

@@ -1,12 +1,12 @@
 {
 	"version": 3,
-	"file": "master.css",
+	"file": "popup.css",
 	"sources": [
-		"../sass/master.scss",
+		"../sass/popup.scss",
 		"../sass/utils/_variables.scss",
 		"../sass/utils/_functions.scss",
 		"../sass/utils/_mixins.scss"
 	],
 	"names": [],
-	"mappings": "AEGA,AAAA,KAAK,CAAC;CAEE,eAAc,CAAE,IAAC;CAAjB,iBAAc,CAAE,KAAC;CAExB"
+	"mappings": "AEGA,AAAA,KAAK,CAAC;CAEE,eAAc,CAAE,QAAC;CAAjB,aAAc,CAAE,QAAC;CAExB"
 }

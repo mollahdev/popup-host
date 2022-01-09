@@ -1,17 +1,17 @@
 // components color
-$space_colors: (
-    'primary_color'     : red,
-    'secondary_color'   : blue
+$popup_colors: (
+    'primary_color'     : #0893E4,
+    'white_color'       : #ffffff
 );
 
 // image source directory variable
-$space_image_source_dir: './images';
+$popup_image_source_dir: './images';
 
 // responsive breakpoints
-$space_small_mobile   : 400px;
-$space_mobile         : 575px;
-$space_tablet         : 768px;
-$space_large_tablet   : 850px;
-$space_laptop         : 991px;
-$space_small_desktop  : 1199px;
-$space_desktop        : 1600px;
+$popup_small_mobile   : 400px;
+$popup_mobile         : 575px;
+$popup_tablet         : 768px;
+$popup_large_tablet   : 850px;
+$popup_laptop         : 991px;
+$popup_small_desktop  : 1199px;
+$popup_desktop        : 1600px;
