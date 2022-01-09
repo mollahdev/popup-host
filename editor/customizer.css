@@ -1,6 +1,11 @@
+.customizer button, .customizer a {
+	transition: all linear .2s;
+}
+
 :root {
 	--primary_color: #0893E4;
 	--white_color: #ffffff;
+	--grey_color: #DADADA;
 }
 
 * {
@@ -10,8 +15,11 @@
 }
 
 .customizer__header {
-	padding: 5px 10px;
-	text-align: right;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	padding-right: 15px;
+	justify-content: right;
 	background-color: var(--primary_color);
 }
 
@@ -21,14 +29,24 @@
 	font-size: 15px;
 	border-radius: 4px;
 	border: 0px;
+	cursor: pointer;
 }
 
 .customizer__sidebar {
 	float: left;
 	width: 400px;
+	background-color: var(--grey_color);
+	height: calc(100vh - 50px);
+	overflow-y: hidden;
+	padding: 10px;
 }
 
 .customizer__content {
 	float: left;
-	width: calc(100vw - 400px);
+	width: calc(100% - 400px);
+	padding: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 50px);
 }

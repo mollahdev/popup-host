@@ -1,0 +1,2 @@
+(()=>{"use strict";class s{sidebarInit(){console.log("hell world")}}class t extends(Object.assign(s)){constructor(){super(),window.addEventListener("DOMContentLoaded",this.init.bind(this))}init(){this.sidebarInit()}}new t})();
+//# sourceMappingURL=index.js.map

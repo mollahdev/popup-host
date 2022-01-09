@@ -2,7 +2,7 @@
 // Create CSS variabel into root selector
 //
 :root {
-    @each $variable, $color in $space_colors {
+    @each $variable, $color in $popup_colors {
         --#{$variable}: #{$color};
     }
 }
@@ -17,7 +17,7 @@
     };
 
     @if $type == 'sass' {
-        @each $variable, $color in $space_colors {
+        @each $variable, $color in $popup_colors {
             @if $variable_name and $variable == $variable_name {
                 @return $color;
             }  
@@ -52,5 +52,5 @@
 //
 
 @function use_image( $image_name ) {
-    @return url("#{$space_image_source_dir}/#{$image_name}");
+    @return url("#{$popup_image_source_dir}/#{$image_name}");
 }
