@@ -15,9 +15,8 @@ class Customizer extends Sidebar {
      * @class GlobalControls returns the global controls settings
      * 
      */ 
-    createControls() {
-        const config = new GlobalControls();
-        this.createControlMarkup( config )
+    createControls(type) {
+        this.createControlMarkup( this.globalControls, type )
     }
 
     /**
@@ -34,27 +33,39 @@ class Customizer extends Sidebar {
     /**
      * 
      * 
+     * Generate stylesheet 
+     * 
+     */ 
+    generateStyleSheet() {
+
+        // generate global stylesheet
+        jQuery('head').append('<style id="global-settings">' + this.globalControls.css + '</style>');
+    }
+
+    /**
+     * 
+     * 
      * Initalize customizer script
      * 
      */ 
     init() {
         const self = this;
+        self.globalControls = new GlobalControls();
         self.sidebarInit();
         self.createWidget();
-        
+        self.generateStyleSheet();
+
         // change sidebar markup based on what settings user want 
         jQuery(document).on('click', '.page-settings, .all-widget', function() {
-
-           
 
             const type = this.dataset.type;
             switch( type ) {
                 case 'global-settings':
-                self.createControls.apply(self);
+                self.createControls.call(self, type);
                 break;
                 
                 case 'all-widgets':
-                self.createWidget.apply(self);
+                self.createWidget.call(self, type);
                 break;
             }
 

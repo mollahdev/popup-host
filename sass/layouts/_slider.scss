@@ -1,0 +1,9 @@
+.slider-control {
+  display: flex;  
+  align-items: center;
+
+  .value {
+      width: 75px;
+      text-align: right;
+  }
+}

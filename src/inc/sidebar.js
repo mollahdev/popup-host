@@ -1,3 +1,4 @@
+import ControlBase from "./base";
 export default class Sidebar {
     sidebarSettings = {
         wheelSpeed: 2,
@@ -20,18 +21,23 @@ export default class Sidebar {
      * Create markup for controls 
      * 
      */ 
-
-    createControlMarkup( config ) {
-        const { controls, css } = config;
+    createControlMarkup( config, sheetName ) {
+        const { controls } = config;
 
         // generate control markup
         const componentMarkup = Object.keys(controls).map( key => {
             const attr = controls[key];
+            const component = ControlBase[attr.type]
+            
+            if( !component ) {
+                return '';
+            }
+
             return `
-                <div class="control-item">
-                    <label data-is-block="${attr.isLabelBlock}"> ${ attr.label } </label>
+                <div class="control-item" data-inline="${attr.isLabelInline}">
+                    <label> ${ attr.label } </label>
                     <div class="control-item--field field-type-${attr.type}">
-                        <input type="text"/>
+                        ${component(attr, key)}
                     </div>
                 </div>
             `
@@ -43,6 +49,34 @@ export default class Sidebar {
                 ${componentMarkup.join('')}
             </div>
         ` );
+
+        jQuery('.sidebar-container').on('input', '.popup-control--trigger', function() {
+            
+            const value = this.value;
+            const key = this.dataset.key
+            let css = ''; 
+
+            // generate style for popup
+            controls[key].default = value;
+            Object.values( controls ).forEach( control => {
+                if( control.selector ) {
+                    css += control.prefix + control.selector.call(control) + '\n\n';
+                }
+            })
+
+            // change old stylesheet with new styles
+            if( controls[key].selector ) {
+               jQuery(`#${sheetName}`).text(css)
+            }
+
+            //update range slider value
+            if( this.type === 'range' ) {
+                this.nextElementSibling.innerText = value + 'px'
+            }
+
+        })
+
+
     }
 
     /**
@@ -52,96 +86,6 @@ export default class Sidebar {
      */ 
     createWidgetMarkup( ) {
         const componentMarkup = `
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
             <div class="popup-element">
                 <div class="popup-widget" draggable="true">
                     <i class="popup-widgets"></i>

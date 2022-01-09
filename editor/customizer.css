@@ -25,6 +25,16 @@
 	grid-template-columns: 400px auto;
 }
 
+.customizer .slider-control {
+	display: flex;
+	align-items: center;
+}
+
+.customizer .slider-control .value {
+	width: 75px;
+	text-align: right;
+}
+
 .customizer .customizer__header {
 	height: 50px;
 	display: flex;
@@ -86,6 +96,35 @@
 	grid-gap: 15px;
 }
 
+.customizer .customizer__sidebar--content .control-container input[type="text"] {
+	padding: 10px;
+	font-size: 14px;
+}
+
+.customizer .customizer__sidebar--content .control-container input {
+	width: 100%;
+	display: inline-block;
+	margin-top: 7px;
+}
+
+.customizer .customizer__sidebar--content .control-item {
+	margin-top: 25px;
+}
+
+.customizer .customizer__sidebar--content .control-item[data-inline="true"] {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.customizer .customizer__sidebar--content .control-item[data-inline="true"] .control-item--field {
+	width: 60px;
+}
+
+.customizer .customizer__sidebar--content .control-item[data-inline="true"] .control-item--field input {
+	margin: 0 !important;
+}
+
 .customizer .customizer__sidebar--content .popup-widget {
 	background: var(--white_color);
 	padding: 13px;
@@ -125,4 +164,5 @@
 	align-items: center;
 	background: #999;
 	min-height: calc(100vh - 50px);
+	overflow: hidden;
 }

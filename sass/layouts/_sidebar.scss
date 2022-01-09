@@ -40,6 +40,37 @@
             grid-template-columns: 1fr 1fr;
             grid-gap: 15px;
         }
+        
+
+        .control-container {
+            input[type="text"] {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            input {
+                width: 100%;
+                display: inline-block;
+                margin-top: 7px;
+            }
+        }
+
+        .control-item {
+            margin-top: 25px;
+
+            &[data-inline="true"] {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .control-item--field {
+                    width: 60px;
+                    input {
+                        margin: 0 !important;
+                    }
+                }
+            }
+        }
 
         .popup-widget {
             background: css_var('white_color');
