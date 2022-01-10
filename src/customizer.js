@@ -39,7 +39,7 @@ class Customizer extends Sidebar {
      * Generate stylesheet 
      * 
      */ 
-    generateStyleSheet( id = 'global-settings', isGlobal = true, css = '' ) {
+    generateStyleSheet( id = 'global-settings-1', isGlobal = true, css = '' ) {
         // generate global stylesheet
         if( isGlobal ) {
             jQuery('head').append(`<style id="${id}">` + this.globalControls.css + '</style>');
@@ -114,8 +114,10 @@ class Customizer extends Sidebar {
         self.dropWidget( self );
 
         // change sidebar markup based on what settings user want 
-        jQuery(document).on('click', '.page-settings, .all-widget, .popup-widget-element', function() {
-
+        jQuery(document).on('click', '.page-settings, .all-widget, .popup-widget-element', function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+            
             const type = this.dataset.type;
             switch( type ) {
                 case 'global-settings': // when global settings button clicked

@@ -26,6 +26,7 @@ export default class Sidebar {
     createControlMarkup( config, sheetName ) {
         const { controls } = config;
 
+
         // generate control markup
         const componentMarkup = Object.keys(controls).map( key => {
             const attr = controls[key];
@@ -59,8 +60,11 @@ export default class Sidebar {
          * This event is responsible to chapter the changes of any control input changes 
          * 
          */ 
-        jQuery('.sidebar-container').on('input', '.popup-control--trigger', function() {
+        jQuery('.popup-control--trigger').on('input', function(ev) {
             
+            ev.preventDefault();
+            ev.stopPropagation();
+
             const value = this.value;
             const key = this.dataset.key
             let css = ''; 
@@ -75,7 +79,7 @@ export default class Sidebar {
 
             // change old stylesheet with new styles
             if( controls[key].selector ) {
-               jQuery(`#${sheetName}`).text(css)
+               jQuery(`#${sheetName}-${config.uid}`).text(css)
             }
 
             //update range slider value
@@ -112,7 +116,6 @@ export default class Sidebar {
                 ${componentMarkup.join('')}
             </div>
         ` );
-
     }
 
 

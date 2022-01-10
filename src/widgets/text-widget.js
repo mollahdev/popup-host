@@ -33,7 +33,7 @@ export default class TextWidget extends ControlBase {
 
     render(uid = '') {
         return `
-            <div class="popup-widget-element element-${uid}" id="text_widget" data-type="widget">
+            <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="text_widget" data-type="widget">
                 <div>
                     <span>${this.text_color.default}</span>
                 </div>
