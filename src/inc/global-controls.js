@@ -71,7 +71,7 @@ export default class GlobalControls extends ControlBase {
         this.addControl('global_popup_width', {
             label: 'Popup Width',
             type: 'slider',
-            default: 400,
+            default: 600,
             max: 1000,
             step:10,
             selector: function() {
@@ -84,7 +84,7 @@ export default class GlobalControls extends ControlBase {
         this.addControl('global_popup_height', {
             label: 'Popup Height',
             type: 'slider',
-            default: 400,
+            default: 600,
             max: 1000,
             step:10,
             selector: function() {

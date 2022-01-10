@@ -101,7 +101,6 @@ export default class TextWidget extends ControlBase {
     
 
     render(uid = '') {
-        console.log(this)
         return `
             <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="text_widget" data-type="widget">
                 <div>

@@ -11,6 +11,7 @@ export default class StarWidget extends ControlBase {
             sheet: 'star_widget',
             icon: 'popup-widgets',
             name: 'Star Widget',
+            render: this.render.bind( this.config )
         }
     }
 
@@ -19,14 +20,38 @@ export default class StarWidget extends ControlBase {
         this.addControl('star_color', {
             label: 'Star Color',
             type: 'color',
-            default: '#ffffff',
+            default: '#c75943',
             isLabelInline: true,
             selector: function() {
-                return ` .wrapper .text-widget p {
+                return `span {
                     color: ${this.default};
                 }`
             }
         })
+
+        this.addControl('star_size', {
+            label: 'Star Size',
+            type: 'slider',
+            default: 34,
+            max: 200,
+            step:1,
+            selector: function() {
+                return `span {
+                    display: inline-block;
+                    font-size: ${this.default}px;
+                }`
+            }
+        })
+    }
+
+    render(uid = '') {
+        return `
+            <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="star_widget" data-type="widget">
+                <div>
+                    <span class="popup-star"></span>
+                </div>
+            </div>
+        `
     }
     
 
