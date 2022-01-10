@@ -119,12 +119,12 @@
 	grid-gap: 15px;
 }
 
-.customizer .customizer__sidebar--content .control-container input[type="text"] {
+.customizer .customizer__sidebar--content .control-container input[type="text"], .customizer .customizer__sidebar--content .control-container select {
 	padding: 10px;
 	font-size: 14px;
 }
 
-.customizer .customizer__sidebar--content .control-container input {
+.customizer .customizer__sidebar--content .control-container input, .customizer .customizer__sidebar--content .control-container select {
 	width: 100%;
 	display: inline-block;
 	margin-top: 7px;

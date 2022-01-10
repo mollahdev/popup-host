@@ -73,7 +73,9 @@ export default class Sidebar {
             controls[key].default = value;
             Object.values( controls ).forEach( control => {
                 if( control.selector ) {
-                    css += control.prefix + control.selector.call(control) + '\n\n';
+                    if( control.selector.call(control) ) {
+                        css += control.prefix + control.selector.call(control) + '\n\n';
+                    }
                 }
             })
 

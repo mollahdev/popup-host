@@ -68,7 +68,9 @@ class Customizer extends Sidebar {
             Object.values( controls ).forEach( control => {
                 if( control.selector ) {
                     control.prefix = `#popup .element-${_uid} `
-                    css += control.prefix + control.selector.call(control) + '\n\n';
+                    if( control.selector.call(control) ) {
+                        css += control.prefix + control.selector.call(control) + '\n\n';
+                    }
                 }
             })
             this.generateStyleSheet( `${widget.sheet}-${widget.uid}`, false, css )

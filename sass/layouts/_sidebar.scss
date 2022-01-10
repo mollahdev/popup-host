@@ -43,12 +43,12 @@
         
 
         .control-container {
-            input[type="text"] {
+            input[type="text"], select {
                 padding: 10px;
                 font-size: 14px;
             }
 
-            input {
+            input, select {
                 width: 100%;
                 display: inline-block;
                 margin-top: 7px;

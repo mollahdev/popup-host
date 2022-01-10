@@ -31,7 +31,9 @@ export default class ControlBase {
                         props.prefix = `#popup .element-${self.uid} `;
                     }
 
-                    self.css += props.prefix + props.selector.call(props) + '\n\n';
+                    if( props.selector.call(props) ) {
+                        self.css += props.prefix + props.selector.call(props) + '\n\n';
+                    }
                 }
 
                 props.isLabelInline = props.isLabelInline || false;
@@ -39,6 +41,29 @@ export default class ControlBase {
             }
 
         })
+    }
+
+    /**
+     * 
+     * 
+     * select control 
+     * 
+     */ 
+    static select( props, key ) {
+
+        return (
+            `<select value="${props.default}" data-key=${key} type="select" class="popup-control--trigger">
+                ${
+                    (()=>{
+                        const options = Object.keys(props.options).map( item =>{
+                            return `<option value="${item}">${props.options[item]}</option>`
+                        })
+                        return options.join('');
+                    })()
+                }
+            </select>
+            `
+        )
     }
 
     /**
