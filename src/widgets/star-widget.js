@@ -47,6 +47,7 @@ export default class StarWidget extends ControlBase {
     render(uid = '') {
         return `
             <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="star_widget" data-type="widget">
+                <i class="remove-btn">x</i>
                 <div>
                     <span class="popup-star"></span>
                 </div>

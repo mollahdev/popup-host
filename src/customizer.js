@@ -102,6 +102,26 @@ class Customizer extends Sidebar {
 
     /**
      * 
+     * Remove Widget 
+     * 
+     */ 
+    removeWidget( self ) {
+        jQuery(document).on('click', '.remove-btn', function(ev){
+            ev.preventDefault();
+            ev.stopPropagation();
+
+            const widget = jQuery(this).parent();
+            const id = widget.attr('id');
+            const uid = widget.data('uid')
+            const stylesheet = id + '-' + uid;
+            jQuery(`#${stylesheet}`).remove();
+            widget.remove();
+        
+        })
+    }
+
+    /**
+     * 
      * 
      * Initalize customizer script
      * 
@@ -114,6 +134,7 @@ class Customizer extends Sidebar {
         self.createWidget();
         self.generateStyleSheet();
         self.dropWidget( self );
+        self.removeWidget( self );
 
         // change sidebar markup based on what settings user want 
         jQuery(document).on('click', '.page-settings, .all-widget, .popup-widget-element', function(ev) {
@@ -138,6 +159,7 @@ class Customizer extends Sidebar {
             // update scrollbar 
             self.sidebarSettings.ps.update()
             self.dropWidget( self );
+            self.removeWidget( self );
 
         })
     }

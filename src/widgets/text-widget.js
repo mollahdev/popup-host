@@ -103,6 +103,7 @@ export default class TextWidget extends ControlBase {
     render(uid = '') {
         return `
             <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="text_widget" data-type="widget">
+                <i class="remove-btn">x</i>
                 <div>
                     <span>${this.text_content.default}</span>
                 </div>

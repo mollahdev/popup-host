@@ -43,9 +43,35 @@
 	outline: 2px dashed var(--primary_color);
 }
 
+.customizer .popup-widget-element:hover .remove-btn {
+	display: inline-block;
+}
+
 .customizer .container {
 	display: grid;
 	grid-template-columns: 400px auto;
+}
+
+.customizer .remove-btn {
+	background: #ffcaca;
+	color: red;
+	width: 30px;
+	display: inline-block;
+	height: 30px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	border-radius: 50%;
+	display: none;
+	cursor: pointer;
+}
+
+.customizer .remove-btn:hover {
+	background: red;
+	color: #fff;
 }
 
 .customizer .slider-control {
