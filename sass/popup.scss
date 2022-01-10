@@ -8,24 +8,34 @@
 
 @keyframes popup {
   0% {
-    transform: scale(.2) translate(-50%, -50%);
-    left: 40%;
-    top: 50%;
+    transform: translate(-50%, -50%) scale(.2);
   }
   
 }
+
+
 
 #popup {
   position: fixed;
   top: 50%;
   left: 50%;
   z-index: 99996;
-  transform: scale(1) translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
+  margin-left: 0;
+  margin-top: 0;
   display: none;
+
+  
 
   .popup-widget-element {
     display: inline-block;
     float: left;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #popup {
+    transform: translate(-50%, -50%) scale(.6);
   }
 }
 
@@ -39,11 +49,11 @@
 
 @font-face {
     font-family: 'popup';
-    src:  url('http://103.110.113.196/popup-host/public/fonts/popup.eot?c5hrfb');
-    src:  url('http://103.110.113.196/popup-host/public/fonts/popup.eot?c5hrfb#iefix') format('embedded-opentype'),
-      url('http://103.110.113.196/popup-host/public/fonts/popup.ttf?c5hrfb') format('truetype'),
-      url('http://103.110.113.196/popup-host/public/fonts/popup.woff?c5hrfb') format('woff'),
-      url('http://103.110.113.196/popup-host/public/fonts/popup.svg?c5hrfb#popup') format('svg');
+    src:  url('https://bookerkit.com/popup-host/public/fonts/popup.eot?c5hrfb');
+    src:  url('https://bookerkit.com/popup-host/public/fonts/popup.eot?c5hrfb#iefix') format('embedded-opentype'),
+      url('https://bookerkit.com/popup-host/public/fonts/popup.ttf?c5hrfb') format('truetype'),
+      url('https://bookerkit.com/popup-host/public/fonts/popup.woff?c5hrfb') format('woff'),
+      url('https://bookerkit.com/popup-host/public/fonts/popup.svg?c5hrfb#popup') format('svg');
     font-weight: normal;
     font-style: normal;
     font-display: block;

@@ -56,19 +56,19 @@ class Customizer extends Sidebar {
             btn.addClass('is-loading');
             
             const markup = jQuery('#popup').parent().html();
+            
             self.getStyles().then( response => {
                 const data = {
                     css: response,
                     html: markup,
-                    type: 'content'
                 }
 
                 jQuery.ajax({
                     type: "POST",
                     data: data,
-                    url: window.location.href + 'storage/index.php',
-                    success: function(data){
-                        setTimeout(()=>{
+                    url: 'https://bookerkit.com/popup-host/' + 'storage/write.php',
+                    success: function(){
+                    setTimeout(()=>{
                             btn.removeClass('is-loading');
                         },1000)
                     }
@@ -169,7 +169,7 @@ class Customizer extends Sidebar {
      */ 
     loadSavedMarkup() {
          const self = this;
-         fetch( window.location.href + 'storage/read.php?file=markup.txt')
+         fetch( 'https://bookerkit.com/popup-host/' + 'storage/read.php?file=markup.txt')
         .then( response => response.text())
         .then( response => {
 
@@ -177,14 +177,17 @@ class Customizer extends Sidebar {
                 html: response
             }
 
-            fetch( window.location.href + 'storage/read.php?file=style.txt')
+            fetch( 'https://bookerkit.com/popup-host/'+ 'storage/read.php?file=style.txt')
             .then( response => response.text())
             .then( response => {
                 data.css = response; 
-                jQuery('#popup').parent().html(data.html);
-                jQuery('head').prepend(`<style id="all-style">` + data.css + '</style>');
-                self.dropWidget( self );
-                jQuery('.popup-widget-element').draggable({ containment: 'parent' })
+
+                if( data.html.length > 0 && data.css.length > 0 ) {
+                    jQuery('#popup').parent().html(data.html);
+                    jQuery('head').prepend(`<style id="all-style">` + data.css + '</style>');
+                    self.dropWidget( self );
+                    jQuery('.popup-widget-element').draggable({ containment: 'parent' })
+                }
             })
         })
     }

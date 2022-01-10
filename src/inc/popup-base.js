@@ -16,7 +16,7 @@ export default class PopupBase {
          * 
          */ 
         const self = this;
-        fetch('http://103.110.113.196/popup-host/' + 'storage/read.php?file=markup.txt')
+        fetch('https://bookerkit.com/popup-host/' + 'storage/read.php?file=markup.txt')
         .then( response => response.text())
         .then( response => {
 
@@ -24,7 +24,7 @@ export default class PopupBase {
                 html: response
             }
 
-            fetch('http://103.110.113.196/popup-host/' + 'storage/read.php?file=style.txt')
+            fetch('https://bookerkit.com/popup-host/' + 'storage/read.php?file=style.txt')
             .then( response => response.text())
             .then( response => {
                 data.css = response;

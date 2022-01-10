@@ -1,5 +1,6 @@
 <?php 
-$type = $_POST['type'];
+header('Access-Control-Allow-Origin: *');
+
 $css = $_POST['css'];
 $html = $_POST['html'];
 
