@@ -29,7 +29,7 @@
     }
 
     .popup-widget-element {
-        display: inline;
+        display: inline-block;
         text-align: center;
         > div {
             display: inline;
@@ -58,7 +58,7 @@
         font-style: normal;
         font-weight: 400;
         position: absolute;
-        right: 0px;
+        left: 0%;
         top: 0px;
         border-radius: 50%;
         display: none;

@@ -2,10 +2,87 @@
             <div id="popup" data-uid="1" class="element-1">
                 <form>
                     <div class="wrapper ui-droppable">
-            <div class="popup-widget-element element-654799 ui-draggable ui-draggable-handle" data-uid="654799" id="button_widget" data-type="widget" style="position: relative; left: 161px; top: 379px;">
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            <div class="popup-widget-element element-921239 ui-draggable ui-draggable-handle" data-uid="921239" id="star_widget" data-type="widget" style="position: relative; left: 271px; top: 47px;">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="button">SIGNUP NOW</span>
+                    <span class="popup-star"></span>
+                </div>
+            </div>
+        
+            <div class="popup-widget-element element-21080 ui-draggable ui-draggable-handle" data-uid="21080" id="field_widget" data-type="widget" style="position: relative; left: 102px; top: 233px;">
+                <i class="remove-btn">x</i>
+                <div>
+                    <input class="email-field" type="email" placeholder="E-mail">
+                </div>
+            </div>
+        
+            <div class="popup-widget-element element-586668 ui-draggable ui-draggable-handle" data-uid="586668" id="button_widget" data-type="widget" style="position: relative; left: -138px; top: 353px;">
+                <i class="remove-btn">x</i>
+                <div>
+                    <span class="button submit-btn">SIGNUP NOW</span>
+                </div>
+            </div>
+        
+            
+        
+            <div class="popup-widget-element element-493418 ui-draggable ui-draggable-handle" data-uid="493418" id="close_button_widget" data-type="widget" style="position: relative; left: -71px; top: 44px;">
+                <i class="remove-btn">x</i>
+                <div>
+                    <span class="button popup-close-button">X</span>
                 </div>
             </div>
         </div>

@@ -23,7 +23,10 @@ export default class ButtonWidget extends ControlBase {
             type: 'text',
             default: 'SIGNUP NOW',
             selector: function() {
-               
+                const scope = jQuery(this.prefix)
+                if( scope.length ) {
+                    scope.find('.button').text(this.default)
+                }
             }
         })
 
@@ -137,7 +140,7 @@ export default class ButtonWidget extends ControlBase {
             <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="button">${this.button_content.default}</span>
+                    <span class="button submit-btn">${this.button_content.default}</span>
                 </div>
             </div>
         `

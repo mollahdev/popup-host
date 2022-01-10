@@ -84,6 +84,20 @@ export default class TextWidget extends ControlBase {
                 }`
             }
         })
+        
+        this.addControl('text_padding_x', {
+            label: 'Padding X',
+            type: 'slider',
+            default: 20,
+            max: 600,
+            step:1,
+            selector: function() {
+                return `span {
+                    padding-left: ${this.default}px;
+                    padding-right: ${this.default}px;
+                }`
+            }
+        })
 
         this.addControl('text_line_height', {
             label: 'Text Line Height',

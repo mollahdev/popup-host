@@ -72,7 +72,9 @@ class Customizer extends Sidebar {
                     data: data,
                     url: window.location.href + 'storage/index.php',
                     success: function(data){
-                        btn.removeClass('is-loading');
+                        setTimeout(()=>{
+                            btn.removeClass('is-loading');
+                        },1000)
                     }
                 });
             })
@@ -137,7 +139,8 @@ class Customizer extends Sidebar {
         })
 
         // make preview panel widget draggable
-        jQuery( "#popup form > .wrapper" ).droppable({
+        const container = jQuery(document).find("#popup form > .wrapper");
+        container.droppable({
             accept: '.popup-widget', 
             drop: function( event, ui ) {
                 const type = ui.draggable.data('type');
@@ -169,6 +172,34 @@ class Customizer extends Sidebar {
     /**
      * 
      * 
+     * Load Saved markup 
+     * 
+     */ 
+    loadSavedMarkup() {
+         const self = this;
+         fetch( window.location.href + 'storage/read.php?file=markup.txt')
+        .then( response => response.text())
+        .then( response => {
+
+            const data = {
+                html: response
+            }
+
+            fetch( window.location.href + 'storage/read.php?file=style.txt')
+            .then( response => response.text())
+            .then( response => {
+                data.css = response; 
+                jQuery('#popup').parent().html(data.html);
+                jQuery('head').prepend(`<style id="all-style">` + data.css + '</style>');
+
+                self.dropWidget( self );
+            })
+        })
+    }
+
+    /**
+     * 
+     * 
      * Initalize customizer script
      * 
      */ 
@@ -177,6 +208,7 @@ class Customizer extends Sidebar {
         const self = this;
         self.globalControls = new GlobalControls();
         self.sidebarInit();
+        self.loadSavedMarkup();
         self.createWidget();
         self.onSaveChanges();
         self.generateStyleSheet();

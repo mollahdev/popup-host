@@ -32,7 +32,7 @@ export default class StarWidget extends ControlBase {
         this.addControl('star_size', {
             label: 'Star Size',
             type: 'slider',
-            default: 34,
+            default: 44,
             max: 200,
             step:1,
             selector: function() {

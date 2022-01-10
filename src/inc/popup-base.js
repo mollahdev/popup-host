@@ -32,8 +32,6 @@ export default class PopupBase {
                 window.dispatchEvent( new CustomEvent('popup/init') );
             })
         })
-
-        
-        
+ 
     }
 }

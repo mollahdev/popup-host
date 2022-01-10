@@ -50,7 +50,7 @@ export default class GlobalControls extends ControlBase {
             selector: function() {
                 return ` .wrapper{
                     border-width: ${this.default}px;
-                    --border-width: ${this.default}px;
+                    --border-width: ${this.default * 2 }px;
                 }`
             }
         })

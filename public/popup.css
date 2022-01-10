@@ -27,6 +27,10 @@
 	display: none;
 }
 
+#popup .popup-widget-element {
+	display: inline-block;
+}
+
 .show-popup #popup {
 	display: inline-block;
 	animation-name: popup;

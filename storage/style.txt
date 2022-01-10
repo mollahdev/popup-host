@@ -10,7 +10,7 @@
 
 #popup.element-1  .wrapper{
                     border-width: 5px;
-                    --border-width: 5px;
+                    --border-width: 10px;
                 }
 
 #popup.element-1  .wrapper{
@@ -25,39 +25,127 @@
                     height: 600px
                 }
 
-#popup .element-654799 .button{
-                    font-size: 30px
+#popup .element-921239 span {
+                    color: #c75943;
                 }
 
-#popup .element-654799 .button{
-                    padding-left: 51px;
-                    padding-right: 51px;
+#popup .element-921239 span {
+                    display: inline-block;
+                    font-size: 44px;
                 }
 
-#popup .element-654799 .button{
-                    padding-top: 21px;
-                    padding-bottom: 21px;
+#popup .element-21080 input {
+                    border: 0;
+                    font-size: 20px
                 }
 
-#popup .element-654799 .button{
+#popup .element-21080 input {
+                    width: 300px
+                }
+
+#popup .element-21080 input {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+
+#popup .element-21080 input {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+#popup .element-21080 input {
                     border-radius: 20px;
                 }
 
-#popup .element-654799 .button {
+#popup .element-21080 input {
                     display: inline-block;
-                    color: #ffffff;
+                    color: #B02827;
                 }
 
-#popup .element-654799 .button:hover {
+#popup .element-21080 input:hover {
                     display: inline-block;
                     color: #414142;
                 }
 
-#popup .element-654799 .button {
+#popup .element-21080 input {
+                    cursor:pointer;
+                    background: #ffffff;
+                }
+
+#popup .element-21080 input:hover {
+                    background: #eeeeee;
+                }
+
+#popup .element-586668 .button{
+                    font-size: 20px
+                }
+
+#popup .element-586668 .button{
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+
+#popup .element-586668 .button{
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+#popup .element-586668 .button{
+                    border-radius: 20px;
+                }
+
+#popup .element-586668 .button {
+                    display: inline-block;
+                    color: #ffffff;
+                }
+
+#popup .element-586668 .button:hover {
+                    display: inline-block;
+                    color: #414142;
+                }
+
+#popup .element-586668 .button {
                     background: #414142;
                 }
 
-#popup .element-654799 .button:hover {
+#popup .element-586668 .button:hover {
                     background: #ffffff;
+                }
+
+#popup .element-493418 .button{
+                    font-size: 20px
+                }
+
+#popup .element-493418 .button{
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+
+#popup .element-493418 .button{
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+#popup .element-493418 .button{
+                    border-radius: 20px;
+                }
+
+#popup .element-493418 .button {
+                    display: inline-block;
+                    color: #B02827;
+                }
+
+#popup .element-493418 .button:hover {
+                    display: inline-block;
+                    color: #414142;
+                }
+
+#popup .element-493418 .button {
+                    cursor:pointer;
+                    background: #ffffff;
+                }
+
+#popup .element-493418 .button:hover {
+                    background: #B02827;
                 }
 
