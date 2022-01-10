@@ -8,54 +8,78 @@
         
             
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="text_widget" data-type="widget" style="position: relative; left: 89px; top: 186px;">
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget" data-type="widget" style="position: relative; left: 265px; top: 21px;">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span>No credit card required. No Surprises </span>
+                    <span class="popup-star"></span>
                 </div>
             </div>
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="button_widget" data-type="widget" style="position: relative; left: -34px; top: 273px;">
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget2" data-type="widget" style="position: relative; left: 114px; top: 69px;">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="button submit-btn">SIGNUP NOW</span>
+                    <span class="popup-star"></span>
                 </div>
             </div>
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="field_widget" data-type="widget" style="position: relative; left: 106px; top: 317px;">
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget3" data-type="widget" style="position: relative; left: 261px; top: 69px;">
+                <i class="remove-btn">x</i>
+                <div>
+                    <span class="popup-star"></span>
+                </div>
+            </div>
+        
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="heading_widget" data-type="widget" style="position: relative; left: 0px; top: 58px;">
+                <i class="remove-btn">x</i>
+                <div>
+                    <h2>All the text and elements in this popup should be editable and dragable</h2>
+                </div>
+            </div>
+        
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="field_widget" data-type="widget" style="position: relative; left: 92px; top: 90px;">
                 <i class="remove-btn">x</i>
                 <div>
                     <input class="email-field" type="email" placeholder="E-mail">
                 </div>
             </div>
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget2" data-type="widget" style="position: relative; left: -46px; top: -27px;">
+            
+        
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="button_widget" data-type="widget" style="position: relative; left: 98px; top: 109px;">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="popup-star"></span>
+                    <span class="button submit-btn">SIGNUP NOW</span>
                 </div>
             </div>
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget" data-type="widget" style="position: relative; left: -293px; top: 39px;">
+            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="text_widget" data-type="widget" style="position: relative; left: 142px; top: 133px;">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="popup-star"></span>
+                    <span>No credit card required. No Surprises </span>
                 </div>
             </div>
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="star_widget3" data-type="widget" style="position: relative; left: -54px; top: -22px;">
-                <i class="remove-btn">x</i>
-                <div>
-                    <span class="popup-star"></span>
-                </div>
-            </div>
+            
         
-            <div class="popup-widget-element ui-draggable ui-draggable-handle" id="heading_widget" data-type="widget" style="position: relative; left: 0px; top: -22px;">
-                <i class="remove-btn">x</i>
-                <div>
-                    <h2>No credit card required. No Surprises </h2>
-                </div>
-            </div>
+            
         </div>
                 </form>
             </div>

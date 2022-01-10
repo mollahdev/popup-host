@@ -17,7 +17,7 @@ export default class HeadingWidget extends ControlBase {
         this.addControl('text_content', {
             label: 'Text Color',
             type: 'text',
-            default: 'No credit card required. No Surprises ',
+            default: 'All the text and elements in this popup should be editable and dragable',
             selector: function() {
                 const scope = jQuery(this.prefix)
                 if( scope.length ) {
