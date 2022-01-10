@@ -89,6 +89,7 @@
 .customizer .popup-widget-element {
 	display: inline-block;
 	text-align: center;
+	float: left;
 }
 
 .customizer .popup-widget-element > div {

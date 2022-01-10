@@ -1,6 +1,4 @@
 import ControlBase from "../inc/base";
-import uid from "../inc/uid";
-
 export default class FieldWidget extends ControlBase {
 
     constructor() {
@@ -8,7 +6,6 @@ export default class FieldWidget extends ControlBase {
         return {
             controls: this.config,
             css: this.css,
-            uid: uid(),
             sheet: 'field_widget',
             icon: 'popup-widgets',
             name: 'Field Widget',
@@ -25,7 +22,7 @@ export default class FieldWidget extends ControlBase {
             selector: function() {
                 const scope = jQuery(this.prefix)
                 if( scope.length ) {
-                    scope.find('input').attr('placeholder', this.default)
+                    scope.find('#field_widget input').attr('placeholder', this.default)
                 }
             }
         })
@@ -37,22 +34,9 @@ export default class FieldWidget extends ControlBase {
             max: 100,
             step:1,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     border: 0;
                     font-size: ${this.default}px
-                }`
-            }
-        })
-        
-        this.addControl('input_width', {
-            label: 'Width',
-            type: 'slider',
-            default: 300,
-            max: 600,
-            step: 2,
-            selector: function() {
-                return `input {
-                    width: ${this.default}px
                 }`
             }
         })
@@ -64,7 +48,7 @@ export default class FieldWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     padding-left: ${this.default}px;
                     padding-right: ${this.default}px;
                 }`
@@ -78,7 +62,7 @@ export default class FieldWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     padding-top: ${this.default}px;
                     padding-bottom: ${this.default}px;
                 }`
@@ -92,7 +76,7 @@ export default class FieldWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     border-radius: ${this.default}px;
                 }`
             }
@@ -104,7 +88,7 @@ export default class FieldWidget extends ControlBase {
             default: '#B02827',
             isLabelInline: true,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -117,7 +101,7 @@ export default class FieldWidget extends ControlBase {
             default: '#414142',
             isLabelInline: true,
             selector: function() {
-                return `input:hover {
+                return `#field_widget input:hover {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -130,7 +114,7 @@ export default class FieldWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return `input {
+                return `#field_widget input {
                     cursor:pointer;
                     background: ${this.default};
                 }`
@@ -143,7 +127,7 @@ export default class FieldWidget extends ControlBase {
             default: '#eeeeee',
             isLabelInline: true,
             selector: function() {
-                return `input:hover {
+                return `#field_widget input:hover {
                     background: ${this.default};
                 }`
             }
@@ -151,9 +135,9 @@ export default class FieldWidget extends ControlBase {
     
     }
     
-    render(uid = '') {
+    render() {
         return `
-            <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="field_widget" data-type="widget">
+            <div class="popup-widget-element" id="field_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <input class="email-field" type="email" placeholder="${this.input_placeholder.default}"/>

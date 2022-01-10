@@ -1,5 +1,4 @@
 import ControlBase from "../inc/base";
-import uid from "../inc/uid";
 
 export default class ButtonWidget extends ControlBase {
 
@@ -8,7 +7,6 @@ export default class ButtonWidget extends ControlBase {
         return {
             controls: this.config,
             css: this.css,
-            uid: uid(),
             sheet: 'button_widget',
             icon: 'popup-widgets',
             name: 'Button Widget',
@@ -25,7 +23,7 @@ export default class ButtonWidget extends ControlBase {
             selector: function() {
                 const scope = jQuery(this.prefix)
                 if( scope.length ) {
-                    scope.find('.button').text(this.default)
+                    scope.find('#button_widget .button').text(this.default)
                 }
             }
         })
@@ -37,7 +35,7 @@ export default class ButtonWidget extends ControlBase {
             max: 100,
             step:1,
             selector: function() {
-                return `.button{
+                return `#button_widget .button{
                     font-size: ${this.default}px
                 }`
             }
@@ -50,7 +48,7 @@ export default class ButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#button_widget .button{
                     padding-left: ${this.default}px;
                     padding-right: ${this.default}px;
                 }`
@@ -64,7 +62,7 @@ export default class ButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#button_widget .button{
                     padding-top: ${this.default}px;
                     padding-bottom: ${this.default}px;
                 }`
@@ -78,7 +76,7 @@ export default class ButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#button_widget .button{
                     border-radius: ${this.default}px;
                 }`
             }
@@ -90,7 +88,7 @@ export default class ButtonWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return `.button {
+                return `#button_widget .button {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -103,7 +101,7 @@ export default class ButtonWidget extends ControlBase {
             default: '#414142',
             isLabelInline: true,
             selector: function() {
-                return `.button:hover {
+                return `#button_widget .button:hover {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -116,7 +114,7 @@ export default class ButtonWidget extends ControlBase {
             default: '#414142',
             isLabelInline: true,
             selector: function() {
-                return `.button {
+                return `#button_widget .button {
                     background: ${this.default};
                 }`
             }
@@ -128,16 +126,16 @@ export default class ButtonWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return `.button:hover {
+                return `#button_widget .button:hover {
                     background: ${this.default};
                 }`
             }
         })
     }
 
-    render(uid = '') {
+    render() {
         return `
-            <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="button_widget" data-type="widget">
+            <div class="popup-widget-element" id="button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="button submit-btn">${this.button_content.default}</span>

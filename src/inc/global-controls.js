@@ -1,13 +1,11 @@
 import ControlBase from "./base";
-
 export default class GlobalControls extends ControlBase {
 
     constructor() {
-        super(true);
+        super();
         return {
             controls: this.config,
             css: this.css,
-            uid: 1,
             sheet: 'popup-stylesheet'
         }
     }
@@ -21,7 +19,7 @@ export default class GlobalControls extends ControlBase {
             default: '#e07a5f',
             isLabelInline: true,
             selector: function() {
-                return `.wrapper{
+                return `.wrapper {
                     background-color: ${this.default};
                     box-shadow: 0px 0px 0 var(--border-width) ${this.default};
                 }`
@@ -62,7 +60,7 @@ export default class GlobalControls extends ControlBase {
             max: 500,
             step:10,
             selector: function() {
-                return ` .wrapper{
+                return `.wrapper {
                     border-radius: ${this.default}px
                 }`
             }
@@ -75,7 +73,7 @@ export default class GlobalControls extends ControlBase {
             max: 1000,
             step:10,
             selector: function() {
-                return ` .wrapper{
+                return `.wrapper{
                     width: ${this.default}px
                 }`
             }

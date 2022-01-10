@@ -1,14 +1,14 @@
 import ControlBase from "../inc/base";
-export default class TextWidget extends ControlBase {
+export default class HeadingWidget extends ControlBase {
 
     constructor() {
         super();
         return {
             controls: this.config,
             css: this.css,
-            sheet: 'text_widget',
+            sheet: 'heading_widget',
             icon: 'popup-widgets',
-            name: 'Text Widget',
+            name: 'Heading',
             render: this.render.bind( this.config )
         }
     }
@@ -21,11 +21,27 @@ export default class TextWidget extends ControlBase {
             selector: function() {
                 const scope = jQuery(this.prefix)
                 if( scope.length ) {
-                    scope.find('#text_widget span').text(this.default)
+                    scope.find('#heading_widget h2').text(this.default)
                 }
             }
         })
 
+        this.addControl('text_font_alignment', {
+            label: 'Font Weight',
+            type: 'select',
+            default: 'left',
+            options: {
+                left: 'Left',
+                center: 'Center',
+                right: 'Right'
+            },
+            selector: function() {
+                return `#heading_widget h2 {
+                    text-align: ${this.default};
+                }`
+            }
+        })
+        
         this.addControl('text_font_weight', {
             label: 'Font Weight',
             type: 'select',
@@ -36,7 +52,7 @@ export default class TextWidget extends ControlBase {
                 900: 'Bold'
             },
             selector: function() {
-                return `#text_widget span {
+                return `#heading_widget h2 {
                     font-weight: ${this.default};
                 }`
             }
@@ -48,7 +64,7 @@ export default class TextWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return `#text_widget span {
+                return `#heading_widget h2 {
                     color: ${this.default};
                 }`
             }
@@ -57,11 +73,11 @@ export default class TextWidget extends ControlBase {
         this.addControl('text_font_size', {
             label: 'Text Font Size',
             type: 'slider',
-            default: 18,
+            default: 24,
             max: 100,
             step:1,
             selector: function() {
-                return `#text_widget span {
+                return `#heading_widget h2 {
                     font-size: ${this.default}px;
                 }`
             }
@@ -74,9 +90,22 @@ export default class TextWidget extends ControlBase {
             max: 600,
             step:1,
             selector: function() {
-                return `#text_widget span {
+                return `#heading_widget h2 {
                     padding-left: ${this.default}px;
                     padding-right: ${this.default}px;
+                }`
+            }
+        })
+        
+        this.addControl('text_line_height', {
+            label: 'Line Height',
+            type: 'slider',
+            default: 24,
+            max: 600,
+            step:1,
+            selector: function() {
+                return `#heading_widget h2 {
+                    line-height: ${this.default}px;
                 }`
             }
         })
@@ -84,10 +113,10 @@ export default class TextWidget extends ControlBase {
     
     render() {
         return `
-            <div class="popup-widget-element" id="text_widget" data-type="widget">
+            <div class="popup-widget-element" id="heading_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span>${this.text_content.default}</span>
+                    <h2>${this.text_content.default}</h2>
                 </div>
             </div>
         `

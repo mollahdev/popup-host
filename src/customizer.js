@@ -1,10 +1,8 @@
 import Sidebar from "./inc/sidebar";
 import GlobalControls from "./inc/global-controls";
 import widgets from "./widgets";
-import uid from "./inc/uid";
-
 class Customizer extends Sidebar {
-    popupWrapper = '';
+
     constructor() {
         super()
         window.addEventListener('DOMContentLoaded', this.init.bind(this) );
@@ -40,13 +38,11 @@ class Customizer extends Sidebar {
      */ 
     getStyles() {
         const promise = new Promise ((resolve, reject) => {
-            const container = jQuery('.popup-widget-element, #popup');
-            let css = '';
+            const container = jQuery('.popup-widget-element');
+            let css = jQuery('#all-style').text();
+                css += jQuery('#stylesheet-global-settings').text();
             container.each( (index, item) => {
-                const _uid = item.dataset.uid
-                const styleSheet = _uid == '1' ? `#global-settings-1` : `#${item.id}-${_uid}`;
-                const newCSS = jQuery(styleSheet).text();
-                css += newCSS;
+                css += jQuery(`#stylesheet-${item.id}`).text();
             })
             resolve(css);
         })
@@ -87,15 +83,20 @@ class Customizer extends Sidebar {
      * Generate stylesheet 
      * 
      */ 
-    generateStyleSheet( id = 'global-settings-1', isGlobal = true, css = '' ) {
-        // generate global stylesheet
+    generateStyleSheet( id = 'global-settings', isGlobal = true, css = '' ) {
+
+        if( jQuery(`#stylesheet-${id}`).length > 0 ) {
+            return false;
+        }
+
         if( isGlobal ) {
-            jQuery('head').append(`<style id="${id}">` + this.globalControls.css + '</style>');
+            jQuery('head').append(`<style id="stylesheet-${id}">` + this.globalControls.css + '</style>');
         }
         else {
-            jQuery('head').append(`<style id="${id}">` + css + '</style>');
+            jQuery('head').append(`<style id="stylesheet-${id}">` + css + '</style>');
         }
     }
+
     /**
      * 
      * 
@@ -103,25 +104,23 @@ class Customizer extends Sidebar {
      * 
      */ 
     onDropWidget( widget ) {
-        const _uid = uid();
-        const controls = widget.controls;
-        widget.uid = _uid;
 
+        const controls = widget.controls;
         if( widget.render ) {
-            const markup = widget.render(_uid);
+            const markup = widget.render();
             let css = ''; 
             jQuery('#popup form > .wrapper').append(markup)
             jQuery('.popup-widget-element').draggable({ containment: 'parent' })
 
             Object.values( controls ).forEach( control => {
                 if( control.selector ) {
-                    control.prefix = `#popup .element-${_uid} `
                     if( control.selector.call(control) ) {
                         css += control.prefix + control.selector.call(control) + '\n\n';
                     }
                 }
             })
-            this.generateStyleSheet( `${widget.sheet}-${widget.uid}`, false, css )
+
+            this.generateStyleSheet( `${widget.sheet}`, false, css )
         }
     }
 
@@ -154,18 +153,11 @@ class Customizer extends Sidebar {
      * Remove Widget 
      * 
      */ 
-    removeWidget( self ) {
+    removeWidget( ) {
         jQuery(document).on('click', '.remove-btn', function(ev){
             ev.preventDefault();
             ev.stopPropagation();
-
-            const widget = jQuery(this).parent();
-            const id = widget.attr('id');
-            const uid = widget.data('uid')
-            const stylesheet = id + '-' + uid;
-            jQuery(`#${stylesheet}`).remove();
-            widget.remove();
-        
+            jQuery(this).parent().remove();
         })
     }
 
@@ -191,8 +183,8 @@ class Customizer extends Sidebar {
                 data.css = response; 
                 jQuery('#popup').parent().html(data.html);
                 jQuery('head').prepend(`<style id="all-style">` + data.css + '</style>');
-
                 self.dropWidget( self );
+                jQuery('.popup-widget-element').draggable({ containment: 'parent' })
             })
         })
     }

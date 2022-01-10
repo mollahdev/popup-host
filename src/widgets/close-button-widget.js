@@ -1,6 +1,4 @@
 import ControlBase from "../inc/base";
-import uid from "../inc/uid";
-
 export default class CloseButtonWidget extends ControlBase {
 
     constructor() {
@@ -8,7 +6,6 @@ export default class CloseButtonWidget extends ControlBase {
         return {
             controls: this.config,
             css: this.css,
-            uid: uid(),
             sheet: 'close_button_widget',
             icon: 'popup-widgets',
             name: 'Close Button',
@@ -25,7 +22,7 @@ export default class CloseButtonWidget extends ControlBase {
             selector: function() {
                 const scope = jQuery(this.prefix)
                 if( scope.length ) {
-                    scope.find('.button').text(this.default)
+                    scope.find('#close_button_widget .button').text(this.default)
                 }
             }
         })
@@ -37,7 +34,7 @@ export default class CloseButtonWidget extends ControlBase {
             max: 100,
             step:1,
             selector: function() {
-                return `.button{
+                return `#close_button_widget .button {
                     font-size: ${this.default}px
                 }`
             }
@@ -50,7 +47,7 @@ export default class CloseButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#close_button_widget .button {
                     padding-left: ${this.default}px;
                     padding-right: ${this.default}px;
                 }`
@@ -64,7 +61,7 @@ export default class CloseButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#close_button_widget .button{
                     padding-top: ${this.default}px;
                     padding-bottom: ${this.default}px;
                 }`
@@ -78,7 +75,7 @@ export default class CloseButtonWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `.button{
+                return `#close_button_widget .button{
                     border-radius: ${this.default}px;
                 }`
             }
@@ -90,7 +87,7 @@ export default class CloseButtonWidget extends ControlBase {
             default: '#B02827',
             isLabelInline: true,
             selector: function() {
-                return `.button {
+                return `#close_button_widget .button {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -103,7 +100,7 @@ export default class CloseButtonWidget extends ControlBase {
             default: '#414142',
             isLabelInline: true,
             selector: function() {
-                return `.button:hover {
+                return `#close_button_widget .button:hover {
                     display: inline-block;
                     color: ${this.default};
                 }`
@@ -116,7 +113,7 @@ export default class CloseButtonWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return `.button {
+                return `#close_button_widget .button {
                     cursor:pointer;
                     background: ${this.default};
                 }`
@@ -129,7 +126,7 @@ export default class CloseButtonWidget extends ControlBase {
             default: '#B02827',
             isLabelInline: true,
             selector: function() {
-                return `.button:hover {
+                return `#close_button_widget .button:hover {
                     background: ${this.default};
                 }`
             }
@@ -138,7 +135,7 @@ export default class CloseButtonWidget extends ControlBase {
 
     render(uid = '') {
         return `
-            <div class="popup-widget-element element-${uid}" data-uid="${uid}" id="close_button_widget" data-type="widget">
+            <div class="popup-widget-element" id="close_button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="button popup-close-button">${this.button_content.default}</span>

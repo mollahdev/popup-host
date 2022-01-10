@@ -1,4 +1,3 @@
-import uid from "./uid";
 /**
  * 
  * 
@@ -9,7 +8,6 @@ import uid from "./uid";
 export default class ControlBase {
     config = {}
     css = ''
-    uid = uid()
 
     /**
      * 
@@ -24,13 +22,7 @@ export default class ControlBase {
             addControl: function( id, props ) {
                 
                 if( props.selector ) {
-
-                    if( isGlobal ) {
-                        props.prefix = `#popup.element-1 `;
-                    } else {
-                        props.prefix = `#popup .element-${self.uid} `;
-                    }
-
+                    props.prefix = `#popup `;
                     if( props.selector.call(props) ) {
                         self.css += props.prefix + props.selector.call(props) + '\n\n';
                     }

@@ -1,151 +1,379 @@
-#popup.element-1 .wrapper{
+#popup .wrapper {
                     background-color: #e07a5f;
                     box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
                 }
 
-#popup.element-1 .wrapper{
+#popup .wrapper{
                     border-color: #ffffff;
                     border-style: solid;
                 }
 
-#popup.element-1  .wrapper{
+#popup  .wrapper{
                     border-width: 5px;
                     --border-width: 10px;
                 }
 
-#popup.element-1  .wrapper{
+#popup .wrapper {
                     border-radius: 500px
                 }
 
-#popup.element-1  .wrapper{
+#popup .wrapper{
                     width: 600px
                 }
 
-#popup.element-1  .wrapper{
+#popup  .wrapper{
                     height: 600px
                 }
 
-#popup .element-921239 span {
-                    color: #c75943;
+#popup .wrapper {
+                    background-color: #e07a5f;
+                    box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
                 }
 
-#popup .element-921239 span {
-                    display: inline-block;
-                    font-size: 44px;
+#popup .wrapper{
+                    border-color: #ffffff;
+                    border-style: solid;
                 }
 
-#popup .element-21080 input {
-                    border: 0;
-                    font-size: 20px
+#popup  .wrapper{
+                    border-width: 5px;
+                    --border-width: 10px;
                 }
 
-#popup .element-21080 input {
-                    width: 300px
+#popup .wrapper {
+                    border-radius: 500px
                 }
 
-#popup .element-21080 input {
+#popup .wrapper{
+                    width: 600px
+                }
+
+#popup  .wrapper{
+                    height: 600px
+                }
+
+#popup #text_widget span {
+                    font-weight: 400;
+                }
+
+#popup #text_widget span {
+                    color: #ffffff;
+                }
+
+#popup #text_widget span {
+                    font-size: 18px;
+                }
+
+#popup #text_widget span {
                     padding-left: 20px;
                     padding-right: 20px;
                 }
 
-#popup .element-21080 input {
-                    padding-top: 20px;
-                    padding-bottom: 20px;
-                }
-
-#popup .element-21080 input {
-                    border-radius: 20px;
-                }
-
-#popup .element-21080 input {
-                    display: inline-block;
-                    color: #B02827;
-                }
-
-#popup .element-21080 input:hover {
-                    display: inline-block;
-                    color: #414142;
-                }
-
-#popup .element-21080 input {
-                    cursor:pointer;
-                    background: #ffffff;
-                }
-
-#popup .element-21080 input:hover {
-                    background: #eeeeee;
-                }
-
-#popup .element-586668 .button{
+#popup #button_widget .button{
                     font-size: 20px
                 }
 
-#popup .element-586668 .button{
+#popup #button_widget .button{
                     padding-left: 20px;
                     padding-right: 20px;
                 }
 
-#popup .element-586668 .button{
+#popup #button_widget .button{
                     padding-top: 20px;
                     padding-bottom: 20px;
                 }
 
-#popup .element-586668 .button{
+#popup #button_widget .button{
                     border-radius: 20px;
                 }
 
-#popup .element-586668 .button {
+#popup #button_widget .button {
                     display: inline-block;
                     color: #ffffff;
                 }
 
-#popup .element-586668 .button:hover {
+#popup #button_widget .button:hover {
                     display: inline-block;
                     color: #414142;
                 }
 
-#popup .element-586668 .button {
+#popup #button_widget .button {
                     background: #414142;
                 }
 
-#popup .element-586668 .button:hover {
+#popup #button_widget .button:hover {
                     background: #ffffff;
                 }
 
-#popup .element-493418 .button{
+#popup #field_widget input {
+                    border: 0;
                     font-size: 20px
                 }
 
-#popup .element-493418 .button{
+#popup #field_widget input {
                     padding-left: 20px;
                     padding-right: 20px;
                 }
 
-#popup .element-493418 .button{
+#popup #field_widget input {
                     padding-top: 20px;
                     padding-bottom: 20px;
                 }
 
-#popup .element-493418 .button{
+#popup #field_widget input {
                     border-radius: 20px;
                 }
 
-#popup .element-493418 .button {
+#popup #field_widget input {
                     display: inline-block;
                     color: #B02827;
                 }
 
-#popup .element-493418 .button:hover {
+#popup #field_widget input:hover {
                     display: inline-block;
                     color: #414142;
                 }
 
-#popup .element-493418 .button {
+#popup #field_widget input {
                     cursor:pointer;
                     background: #ffffff;
                 }
 
-#popup .element-493418 .button:hover {
-                    background: #B02827;
+#popup #field_widget input:hover {
+                    background: #eeeeee;
+                }
+
+#popup .wrapper {
+                    background-color: #e07a5f;
+                    box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
+                }
+
+#popup .wrapper{
+                    border-color: #ffffff;
+                    border-style: solid;
+                }
+
+#popup  .wrapper{
+                    border-width: 5px;
+                    --border-width: 10px;
+                }
+
+#popup .wrapper {
+                    border-radius: 500px
+                }
+
+#popup .wrapper{
+                    width: 600px
+                }
+
+#popup  .wrapper{
+                    height: 600px
+                }
+
+#popup #button_widget .button{
+                    font-size: 8px
+                }
+
+#popup #button_widget .button{
+                    padding-left: 22px;
+                    padding-right: 22px;
+                }
+
+#popup #button_widget .button{
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+#popup #button_widget .button{
+                    border-radius: 20px;
+                }
+
+#popup #button_widget .button {
+                    display: inline-block;
+                    color: #ffffff;
+                }
+
+#popup #button_widget .button:hover {
+                    display: inline-block;
+                    color: #414142;
+                }
+
+#popup #button_widget .button {
+                    background: #414142;
+                }
+
+#popup #button_widget .button:hover {
+                    background: #ffffff;
+                }
+
+#popup #field_widget input {
+                    border: 0;
+                    font-size: 20px
+                }
+
+#popup #field_widget input {
+                    padding-left: 20px;
+                    padding-right: 20px;
+                }
+
+#popup #field_widget input {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
+
+#popup #field_widget input {
+                    border-radius: 0px;
+                }
+
+#popup #field_widget input {
+                    display: inline-block;
+                    color: #B02827;
+                }
+
+#popup #field_widget input:hover {
+                    display: inline-block;
+                    color: #414142;
+                }
+
+#popup #field_widget input {
+                    cursor:pointer;
+                    background: #ffffff;
+                }
+
+#popup #field_widget input:hover {
+                    background: #eeeeee;
+                }
+
+#popup .wrapper {
+                    background-color: #e07a5f;
+                    box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
+                }
+
+#popup .wrapper{
+                    border-color: #ffffff;
+                    border-style: solid;
+                }
+
+#popup  .wrapper{
+                    border-width: 5px;
+                    --border-width: 10px;
+                }
+
+#popup .wrapper {
+                    border-radius: 500px
+                }
+
+#popup .wrapper{
+                    width: 600px
+                }
+
+#popup  .wrapper{
+                    height: 600px
+                }
+
+#popup #star_widget2 span {
+                    color: #302827;
+                }
+
+#popup #star_widget2 span {
+                    display: inline-block;
+                    font-size: 141px;
+                }
+
+#popup #star_widget span {
+                    color: #c75943;
+                }
+
+#popup #star_widget span {
+                    display: inline-block;
+                    font-size: 73px;
+                }
+
+#popup .wrapper {
+                    background-color: #e07a5f;
+                    box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
+                }
+
+#popup .wrapper{
+                    border-color: #ffffff;
+                    border-style: solid;
+                }
+
+#popup  .wrapper{
+                    border-width: 5px;
+                    --border-width: 10px;
+                }
+
+#popup .wrapper {
+                    border-radius: 500px
+                }
+
+#popup .wrapper{
+                    width: 600px
+                }
+
+#popup  .wrapper{
+                    height: 600px
+                }
+
+#popup #star_widget3 span {
+                    color: #ffffff;
+                }
+
+#popup #star_widget3 span {
+                    display: inline-block;
+                    font-size: 104px;
+                }
+
+#popup .wrapper {
+                    background-color: #e07a5f;
+                    box-shadow: 0px 0px 0 var(--border-width) #e07a5f;
+                }
+
+#popup .wrapper{
+                    border-color: #ffffff;
+                    border-style: solid;
+                }
+
+#popup  .wrapper{
+                    border-width: 5px;
+                    --border-width: 10px;
+                }
+
+#popup .wrapper {
+                    border-radius: 500px
+                }
+
+#popup .wrapper{
+                    width: 600px
+                }
+
+#popup  .wrapper{
+                    height: 600px
+                }
+
+#popup #heading_widget h2 {
+                    text-align: center;
+                }
+
+#popup #heading_widget h2 {
+                    font-weight: 700;
+                }
+
+#popup #heading_widget h2 {
+                    color: #ffffff;
+                }
+
+#popup #heading_widget h2 {
+                    font-size: 45px;
+                }
+
+#popup #heading_widget h2 {
+                    padding-left: 40px;
+                    padding-right: 40px;
+                }
+
+#popup #heading_widget h2 {
+                    line-height: 60px;
                 }
 

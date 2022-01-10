@@ -1,14 +1,14 @@
 import ControlBase from "../inc/base";
-export default class StarWidget extends ControlBase {
+export default class StarWidget2 extends ControlBase {
 
     constructor() {
         super();
         return {
             controls: this.config,
             css: this.css,
-            sheet: 'star_widget',
+            sheet: 'star_widget2',
             icon: 'popup-widgets',
-            name: 'Star 1',
+            name: 'Star 2',
             render: this.render.bind( this.config )
         }
     }
@@ -21,7 +21,7 @@ export default class StarWidget extends ControlBase {
             default: '#c75943',
             isLabelInline: true,
             selector: function() {
-                return `#star_widget span {
+                return `#star_widget2 span {
                     color: ${this.default};
                 }`
             }
@@ -34,7 +34,7 @@ export default class StarWidget extends ControlBase {
             max: 200,
             step:1,
             selector: function() {
-                return `#star_widget span {
+                return `#star_widget2 span {
                     display: inline-block;
                     font-size: ${this.default}px;
                 }`
@@ -44,7 +44,7 @@ export default class StarWidget extends ControlBase {
 
     render() {
         return `
-            <div class="popup-widget-element" id="star_widget" data-type="widget">
+            <div class="popup-widget-element" id="star_widget2" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="popup-star"></span>

@@ -29,6 +29,7 @@
 
 #popup .popup-widget-element {
 	display: inline-block;
+	float: left;
 }
 
 .show-popup #popup {

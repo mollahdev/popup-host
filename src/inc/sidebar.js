@@ -81,9 +81,12 @@ export default class Sidebar {
 
             // change old stylesheet with new styles
             if( controls[key].selector ) {
-               jQuery(`#${sheetName}-${config.uid}`).text(css)
+                if( jQuery(`#stylesheet-${sheetName}`).length === 0 ) {
+                    jQuery('head').append(`<style id="stylesheet-${sheetName}">` + css + '</style>');
+                }
+                jQuery(`#stylesheet-${sheetName}`).text(css)
             }
-
+            
             //update range slider value
             if( this.type === 'range' ) {
                 this.nextElementSibling.innerText = value + 'px'
