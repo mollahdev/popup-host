@@ -8,10 +8,16 @@
 
 import PopupBase from "./inc/popup-base";
 class Popup extends PopupBase{
- 
+    
     init() {
+        const config = this.settings.config;
+        const data = this.settings.data;
         
-        console.log(this.settings.config)
+        setTimeout(()=>{
+            window.document.body.classList.add('show-popup');
+            document.head.insertAdjacentHTML("beforeend", `<style>${data.css}</style>`)
+            document.body.insertAdjacentHTML("beforeend", data.html)
+        }, config.setTimeOut)
 
     }
 }

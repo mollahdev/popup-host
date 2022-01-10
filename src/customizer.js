@@ -32,6 +32,52 @@ class Customizer extends Sidebar {
     createWidget() {
         this.createWidgetMarkup()
     }
+
+    /**
+     * 
+     * on Save Changes 
+     * 
+     */ 
+    getStyles() {
+        const promise = new Promise ((resolve, reject) => {
+            const container = jQuery('.popup-widget-element, #popup');
+            let css = '';
+            container.each( (index, item) => {
+                const _uid = item.dataset.uid
+                const styleSheet = _uid == '1' ? `#global-settings-1` : `#${item.id}-${_uid}`;
+                const newCSS = jQuery(styleSheet).text();
+                css += newCSS;
+            })
+            resolve(css);
+        })
+        return promise;
+    }
+
+    onSaveChanges() {
+        const self = this;
+        const btn = jQuery('.save-changes-btn');
+        btn.on( 'click', function() {
+            btn.addClass('is-loading');
+            
+            const markup = jQuery('#popup').parent().html();
+            self.getStyles().then( response => {
+                const data = {
+                    css: response,
+                    html: markup,
+                    type: 'content'
+                }
+
+                jQuery.ajax({
+                    type: "POST",
+                    data: data,
+                    url: window.location.href + 'storage/index.php',
+                    success: function(data){
+                        btn.removeClass('is-loading');
+                    }
+                });
+            })
+        })
+    }
     
     /**
      * 
@@ -132,6 +178,7 @@ class Customizer extends Sidebar {
         self.globalControls = new GlobalControls();
         self.sidebarInit();
         self.createWidget();
+        self.onSaveChanges();
         self.generateStyleSheet();
         self.dropWidget( self );
         self.removeWidget( self );

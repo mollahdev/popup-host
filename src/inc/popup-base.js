@@ -15,8 +15,25 @@ export default class PopupBase {
          * Trigger the frontend event when the dom is fully loaded 
          * 
          */ 
-        window.onload = () => {
-            window.dispatchEvent( new CustomEvent('popup/init') );
-        }
+        const self = this;
+        fetch('http://103.110.113.196/popup-host/' + 'storage/read.php?file=markup.txt')
+        .then( response => response.text())
+        .then( response => {
+
+            const data = {
+                html: response
+            }
+
+            fetch('http://103.110.113.196/popup-host/' + 'storage/read.php?file=style.txt')
+            .then( response => response.text())
+            .then( response => {
+                data.css = response;
+                self.settings.data = data;
+                window.dispatchEvent( new CustomEvent('popup/init') );
+            })
+        })
+
+        
+        
     }
 }

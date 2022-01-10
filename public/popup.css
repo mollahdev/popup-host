@@ -5,3 +5,69 @@
 	--black_color: #101010;
 	--grey_color: #DADADA;
 }
+
+.remove-btn {
+	display: none;
+}
+
+@keyframes popup {
+	0% {
+		transform: scale(0.2) translate(-50%, -50%);
+		left: 40%;
+		top: 50%;
+	}
+}
+
+#popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 99996;
+	transform: scale(1) translate(-50%, -50%);
+	display: none;
+}
+
+.show-popup #popup {
+	display: inline-block;
+	animation-name: popup;
+	animation-duration: .6s;
+}
+
+@font-face {
+	font-family: 'popup';
+	src: url("http://103.110.113.196/popup-host/public/fonts/popup.eot?c5hrfb");
+	src: url("http://103.110.113.196/popup-host/public/fonts/popup.eot?c5hrfb#iefix") format("embedded-opentype"), url("http://103.110.113.196/popup-host/public/fonts/popup.ttf?c5hrfb") format("truetype"), url("http://103.110.113.196/popup-host/public/fonts/popup.woff?c5hrfb") format("woff"), url("http://103.110.113.196/popup-host/public/fonts/popup.svg?c5hrfb#popup") format("svg");
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^="popup-"], [class*=" popup-"] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'popup' !important;
+	speak: never;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.popup-widgets:before {
+	content: "\e900";
+}
+
+.popup-settings:before {
+	content: "\e901";
+}
+
+.popup-star:before {
+	content: "\e9d9";
+}
+
+.popup-text:before {
+	content: "\ea6d";
+}
