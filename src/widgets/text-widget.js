@@ -1,13 +1,14 @@
 import ControlBase from "../inc/base";
-
 export default class TextWidget extends ControlBase {
+
+
 
     constructor() {
         super();
         return {
             controls: this.config,
             css: this.css,
-            uid: this.uid(),
+            uid: this.uid,
             sheet: 'text_widget',
             icon: 'popup-widgets',
             name: 'Text Widget',
@@ -22,7 +23,7 @@ export default class TextWidget extends ControlBase {
             default: '#ffffff',
             isLabelInline: true,
             selector: function() {
-                return ` .wrapper .text-widget p {
+                return `span {
                     color: ${this.default};
                 }`
             }
@@ -30,9 +31,9 @@ export default class TextWidget extends ControlBase {
     }
     
 
-    render() {
+    render(uid = '') {
         return `
-            <div class="popup-widget-element" id="text_widget" data-type="widget">
+            <div class="popup-widget-element element-${uid}" id="text_widget" data-type="widget">
                 <div>
                     <span>${this.text_color.default}</span>
                 </div>

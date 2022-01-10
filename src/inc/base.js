@@ -1,3 +1,4 @@
+import uid from "./uid";
 /**
  * 
  * 
@@ -8,6 +9,7 @@
 export default class ControlBase {
     config = {}
     css = ''
+    uid = uid()
 
     /**
      * 
@@ -15,14 +17,20 @@ export default class ControlBase {
      * Merge controls
      * 
     */
-    constructor() {
+    constructor( isGlobal = false ) {
         const self = this;
         this.registerControls.apply({
 
             addControl: function( id, props ) {
                 
                 if( props.selector ) {
-                    props.prefix = '#popup ';
+
+                    if( isGlobal ) {
+                        props.prefix = `#popup.element-1 `;
+                    } else {
+                        props.prefix = `#popup .element-${self.uid} `;
+                    }
+
                     self.css += props.prefix + props.selector.call(props) + '\n\n';
                 }
 
@@ -31,10 +39,6 @@ export default class ControlBase {
             }
 
         })
-    }
-
-    uid() {
-        return Math.floor(Math.random() * 1000000 )
     }
 
     /**

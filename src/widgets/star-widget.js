@@ -1,5 +1,5 @@
 import ControlBase from "../inc/base";
-
+import uid from "../inc/uid";
 export default class StarWidget extends ControlBase {
 
     constructor() {
@@ -7,7 +7,7 @@ export default class StarWidget extends ControlBase {
         return {
             controls: this.config,
             css: this.css,
-            uid: this.uid(),
+            uid: uid(),
             sheet: 'star_widget',
             icon: 'popup-widgets',
             name: 'Star Widget',
