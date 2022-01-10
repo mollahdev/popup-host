@@ -1,4 +1,6 @@
 import ControlBase from "./base";
+import widgets from "../widgets";
+
 export default class Sidebar {
     sidebarSettings = {
         wheelSpeed: 2,
@@ -50,6 +52,13 @@ export default class Sidebar {
             </div>
         ` );
 
+        /**
+         * 
+         * 
+         * on input change
+         * This event is responsible to chapter the changes of any control input changes 
+         * 
+         */ 
         jQuery('.sidebar-container').on('input', '.popup-control--trigger', function() {
             
             const value = this.value;
@@ -85,31 +94,22 @@ export default class Sidebar {
      * 
      */ 
     createWidgetMarkup( ) {
-        const componentMarkup = `
+
+        const componentMarkup = Object.keys( widgets ).map( key => {
+            const attr = widgets[key];
+            return `
             <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
+                <div class="popup-widget" draggable="true" data-type="${key}">
+                    <i class="${attr.icon}"></i>
+                    <label>${attr.name}</label>
                 </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-            <div class="popup-element">
-                <div class="popup-widget" draggable="true">
-                    <i class="popup-widgets"></i>
-                    <label>Text</label>
-                </div>
-            </div>
-        `
+            </div>`
+        })
 
         // render the markup into the sidebar
         jQuery('.sidebar-container').html( `
             <div class="widget-container">
-                ${componentMarkup}
+                ${componentMarkup.join('')}
             </div>
         ` );
 

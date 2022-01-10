@@ -17,10 +17,32 @@
         @extend %transition
     }
 
+    #popup form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .element-dragover {
+        outline: 2px dashed css_var('primary_color');
+    }
+
+    .popup-widget-element {
+        display: inline;
+        text-align: center;
+        > div {
+            display: inline;
+        }
+        > div:hover {
+            outline: 2px dashed css_var('primary_color');
+        }
+    }
+
     .container {
         display: grid;
         grid-template-columns: 400px auto;
     }
+    
 
     @import './layouts/slider';
     @import './layouts/header';

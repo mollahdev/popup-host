@@ -1,8 +1,9 @@
 import Sidebar from "./inc/sidebar";
 import GlobalControls from "./inc/global-controls";
+import widgets from "./widgets";
 
 class Customizer extends Sidebar {
-
+    popupWrapper = '';
     constructor() {
         super()
         window.addEventListener('DOMContentLoaded', this.init.bind(this) );
@@ -16,7 +17,8 @@ class Customizer extends Sidebar {
      * 
      */ 
     createControls(type) {
-        this.createControlMarkup( this.globalControls, type )
+        const settings = type === 'global-settings' ? this.globalControls : widgets[type];
+        this.createControlMarkup( settings, type )
     }
 
     /**
@@ -37,9 +39,46 @@ class Customizer extends Sidebar {
      * 
      */ 
     generateStyleSheet() {
-
         // generate global stylesheet
         jQuery('head').append('<style id="global-settings">' + this.globalControls.css + '</style>');
+    }
+    /**
+     * 
+     * 
+     * Create widget markup 
+     * 
+     */ 
+    onDropWidget( widget ) {
+        if( widget.render ) {
+            const markup = widget.render();
+            jQuery('#popup form > .wrapper').append(markup)
+            jQuery('.popup-widget-element').draggable({ containment: 'parent' })
+        }
+        
+    }
+
+
+    /**
+     * 
+     * 
+     * Drop widget 
+     * 
+     */ 
+    dropWidget( self ) {
+        jQuery('.popup-widget').draggable({
+            helper: 'clone'
+        })
+    
+        jQuery( "#popup form > .wrapper" ).droppable({
+            accept: '.popup-widget', 
+            drop: function( event, ui ) {
+              
+                const type = ui.draggable.data('type');
+                self.onDropWidget( widgets[type] )
+
+            }
+        });
+
     }
 
     /**
@@ -54,11 +93,13 @@ class Customizer extends Sidebar {
         self.sidebarInit();
         self.createWidget();
         self.generateStyleSheet();
+        self.dropWidget( self );
 
         // change sidebar markup based on what settings user want 
-        jQuery(document).on('click', '.page-settings, .all-widget', function() {
+        jQuery(document).on('click', '.page-settings, .all-widget, .popup-widget-element', function() {
 
             const type = this.dataset.type;
+
             switch( type ) {
                 case 'global-settings':
                 self.createControls.call(self, type);
@@ -67,10 +108,15 @@ class Customizer extends Sidebar {
                 case 'all-widgets':
                 self.createWidget.call(self, type);
                 break;
+                
+                case 'widget':
+                self.createControls.call(self, this.id);
+                break;
             }
 
             // update scrollbar 
             self.sidebarSettings.ps.update()
+            self.dropWidget( self );
 
         })
     }

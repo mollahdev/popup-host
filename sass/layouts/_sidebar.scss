@@ -85,6 +85,11 @@
             user-select: none;
             position: relative;
 
+            &.ui-draggable-dragging {
+                position: fixed !important;
+                z-index: 100 !important;
+            }
+
             &:hover {
                 box-shadow: -1px 3px 9px #bbb3b3;
                 i {
