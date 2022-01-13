@@ -7,31 +7,31 @@
  */ 
 export default class ControlBase {
     config = {}
-    css = ''
-
     /**
      * 
      * 
      * Merge controls
      * 
     */
-    constructor( isGlobal = false ) {
+    constructor() {
         const self = this;
+
+        // collect widget attribute
+        if( this.setWidgetAttribute ) {
+            self.config.widgetAttribute = this.setWidgetAttribute();
+        }
+
+        // bind controls with render method
+        if( this.render ) {
+            self.config.widgetAttribute.render = this.render.bind(self.config);
+        }
+
+        // register the controls with widget
         this.registerControls.apply({
-
             addControl: function( id, props ) {
-                
-                if( props.selector ) {
-                    props.prefix = `#popup `;
-                    if( props.selector.call(props) ) {
-                        self.css += props.prefix + props.selector.call(props) + '\n\n';
-                    }
-                }
-
                 props.isLabelInline = props.isLabelInline || false;
                 self.config[id] = props;
             }
-
         })
     }
 

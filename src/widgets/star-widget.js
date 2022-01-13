@@ -8,7 +8,7 @@ export default class StarWidget extends ControlBase {
             css: this.css,
             sheet: 'star_widget',
             icon: 'popup-widgets',
-            name: 'Star 1',
+            name: 'Star',
             render: this.render.bind( this.config )
         }
     }

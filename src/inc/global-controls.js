@@ -3,13 +3,16 @@ export default class GlobalControls extends ControlBase {
 
     constructor() {
         super();
-        return {
-            controls: this.config,
-            css: this.css,
-            sheet: 'popup-stylesheet'
-        }
+        return this.config;
     }
 
+    setWidgetAttribute() {
+        return {
+            id: 'global',
+            icon: 'title',
+            name: 'Popup Settings'
+        }
+    }
 
     registerControls() {
         
@@ -18,40 +21,13 @@ export default class GlobalControls extends ControlBase {
             type: 'color',
             default: '#e07a5f',
             isLabelInline: true,
-            selector: function() {
-                return `.wrapper {
-                    background-color: ${this.default};
-                    box-shadow: 0px 0px 0 var(--border-width) ${this.default};
+            selector: function( wrapper, value ) {
+                return `${wrapper} .apb-wrapper {
+                    background-color: ${value};
                 }`
             }
         })
         
-        this.addControl('global_popup_border_color', {
-            label: 'Popup Border Color',
-            type: 'color',
-            default: '#ffffff',
-            isLabelInline: true,
-            selector: function() {
-                return `.wrapper{
-                    border-color: ${this.default};
-                    border-style: solid;
-                }`
-            }
-        })
-        
-        this.addControl('global_popup_border_width', {
-            label: 'Popup Border Width',
-            type: 'slider',
-            default: 5,
-            max: 50,
-            step:1,
-            selector: function() {
-                return ` .wrapper{
-                    border-width: ${this.default}px;
-                    --border-width: ${this.default * 2 }px;
-                }`
-            }
-        })
 
         this.addControl('global_popup_radius', {
             label: 'Popup Radius',
@@ -59,9 +35,9 @@ export default class GlobalControls extends ControlBase {
             default: 500,
             max: 500,
             step:10,
-            selector: function() {
-                return `.wrapper {
-                    border-radius: ${this.default}px
+            selector: function( wrapper, value ) {
+                return `${wrapper} .apb-wrapper {
+                    border-radius: ${value}px;
                 }`
             }
         })
@@ -72,9 +48,9 @@ export default class GlobalControls extends ControlBase {
             default: 600,
             max: 1000,
             step:10,
-            selector: function() {
-                return `.wrapper{
-                    width: ${this.default}px
+            selector: function( wrapper, value ) {
+                return `${wrapper} .apb-wrapper{
+                    width: ${value}px;
                 }`
             }
         })
@@ -85,9 +61,9 @@ export default class GlobalControls extends ControlBase {
             default: 600,
             max: 1000,
             step:10,
-            selector: function() {
-                return ` .wrapper{
-                    height: ${this.default}px
+            selector: function(wrapper, value) {
+                return `${wrapper} .apb-wrapper{
+                    height: ${value}px;
                 }`
             }
         })

@@ -1,0 +1,1 @@
+".apb-global .apb-wrapper {background-color: rgb(97, 97, 97); border-radius: 500px; width: 600px; height: 600px;}.apb-8046 span {font-weight: 400; color: rgb(255, 255, 255); font-size: 18px; padding-left: 20px;}.apb-7172 span {font-weight: 400; color: rgb(255, 255, 255); font-size: 100px; padding-left: 203px;}"

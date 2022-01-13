@@ -3,18 +3,33 @@
  * 
  * @author Ashraf
  * @version 1.0.0
- * @last_update 15 January 2021
+ * @last_update 15th January 2021
  * @email mollah.dev@gmail.com
  * @class StylesheetManager
  * @description this class is responsible for managing stylesheet. 
  * It helps to keep unique selector and style by merging them together 
  */ 
 
-class StylesheetManager {
+ class StylesheetManager {
     rule = {};
     constructor( id ) {
         this.styleSheetId = id;
         this.fetchStylesheet();
+    }
+
+    /**
+     * 
+     * 
+     * get seperate selector and style 
+     * 
+     */ 
+    seperateStyle( initialStyle ) {
+        const selector = initialStyle.split('{')[0].trim().replace(/\s{2,}/g, ' ');
+        const style = initialStyle.split('{')[1].trim().replace(/[&\/\\,$~.?<>{}]/g, '').replace(/\s{2,}/g, ' ');
+
+        return {
+            selector, style
+        }
     }
 
     /**
@@ -63,13 +78,28 @@ class StylesheetManager {
 
     insert( selector, newStyle ) {
         selector = selector.trim();
+
         // check is the selector exists
         if( this.rule[selector] ) {
-            let { index, style } = this.rule[selector];
-            style += newStyle;
-            this.rule[selector].style = style;
-            this.sheet.insertRule(`${selector} {${style}}`, index)
-            this.sheet.deleteRule( index + 1 );
+            const index = this.rule[selector].index;
+            const style = this.sheet.rules.item(index).style;
+
+            newStyle.split(';').map( item => {
+                let property = item.split(':')[0]
+                let value = item.split(':')[1]
+                if( property && value ) {
+                    
+                    const isImportant = value.includes('important') ? 'important' : '';
+                    if( isImportant === 'important' ) {
+                        value = value.split('!')[0];
+                    } 
+
+                    style.setProperty(property, value.trim(), isImportant );
+                    this.rule[selector].style = style.cssText;
+                    
+                }
+            })
+
         }else {
             this.rule[selector] = {
                 index: this.length, 
@@ -85,7 +115,7 @@ class StylesheetManager {
      * Get css declaration
      */ 
     cssDeclaration( str, selector ) {
-        const declaration = str.split(selector).pop().replace(/[&\/\\#,$~.?<>{}]/g, '')
+        const declaration = str.split(selector).pop().replace(/[&\/\\,$~.?<>{}]/g, '')
         return declaration.trim()
     }
     /**
@@ -147,15 +177,8 @@ class StylesheetManager {
         this.sheet = sheet;
         this.length= sheet.rules.length;
     }
-
-    
 }
 
-const cssom = new StylesheetManager('builder-css');
 
-/* use case */ 
-cssom.delete(['*', 'body h1', 'h2', 'body', 'h1', '#one span:hover'])
-cssom.insert('h2', 'background: red; color: white')
-cssom.getCSS().then( css => {
-    console.log(css)
-})
+const cssom = new StylesheetManager('builder-css');
+export default cssom;

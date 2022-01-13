@@ -1,7 +1,10 @@
 import ControlBase from "./base";
+import state from "./state";
 import widgets from "../widgets";
+import cssom from './cssom';
 
 export default class Sidebar {
+    
     sidebarSettings = {
         wheelSpeed: 2,
         wheelPropagation: true,
@@ -14,26 +17,44 @@ export default class Sidebar {
      * attach perfect scrollbar plugin into sidebar 
      */ 
     sidebarInit() {
-        const ps  = new PerfectScrollbar('.customizer__sidebar--content', this.sidebarSettings );
+        const ps  = new PerfectScrollbar('.aside__container', this.sidebarSettings );
         this.sidebarSettings.ps = ps;
     }
 
     /**
      * 
      * Create markup for controls 
+     * @param config refers to the controls of the widget
+     * @param uid refers to unique key. This unique get is generated when any widget is droped
      * 
      */ 
-    createControlMarkup( config, sheetName ) {
-        const { controls } = config;
+    createControlMarkup( config, uid ) {
 
+        const storage = state.get();
+        const data = storage[uid];
+        const wrapper = '.apb-' + uid;
 
         // generate control markup
-        const componentMarkup = Object.keys(controls).map( key => {
-            const attr = controls[key];
+        const componentMarkup = Object.keys(config).map( key => {
+            const attr = config[key];
             const component = ControlBase[attr.type]
             
             if( !component ) {
                 return '';
+            }
+
+            // use already saved values
+            if( !Reflect.has( data, key ) ) {
+                data[key] = attr.default;
+            } else {
+                attr.default = data[key];
+            }
+
+            // generate css
+            const initialStyle = attr.selector( wrapper, data[key] );
+            if( initialStyle ) {
+                const { selector, style } = cssom.seperateStyle( initialStyle );
+                cssom.insert(selector, style)
             }
 
             return `
@@ -47,7 +68,7 @@ export default class Sidebar {
         })
 
         // render the markup into the sidebar
-        jQuery('.sidebar-container').html( `
+        jQuery('.aside__container').html( `
             <div class="control-container">
                 ${componentMarkup.join('')}
             </div>
@@ -66,25 +87,15 @@ export default class Sidebar {
             ev.stopPropagation();
 
             const value = this.value;
-            const key = this.dataset.key
-            let css = ''; 
+            const key   = this.dataset.key
 
-            // generate style for popup
-            controls[key].default = value;
-            Object.values( controls ).forEach( control => {
-                if( control.selector ) {
-                    if( control.selector.call(control) ) {
-                        css += control.prefix + control.selector.call(control) + '\n\n';
-                    }
-                }
-            })
+            data[key] = value;
+            const createStyle = config[key].selector( wrapper, data[key] );
 
-            // change old stylesheet with new styles
-            if( controls[key].selector ) {
-                if( jQuery(`#stylesheet-${sheetName}`).length === 0 ) {
-                    jQuery('head').append(`<style id="stylesheet-${sheetName}">` + css + '</style>');
-                }
-                jQuery(`#stylesheet-${sheetName}`).text(css)
+            if( createStyle ) {
+                const { selector, style } = cssom.seperateStyle( createStyle );
+                cssom.insert(selector, style)
+
             }
             
             //update range slider value
@@ -93,8 +104,7 @@ export default class Sidebar {
             }
 
         })
-
-
+        
     }
 
     /**
@@ -105,18 +115,18 @@ export default class Sidebar {
     createWidgetMarkup( ) {
 
         const componentMarkup = Object.keys( widgets ).map( key => {
-            const attr = widgets[key];
+            const { widgetAttribute } = widgets[key];
             return `
-            <div class="popup-element">
+            <div class="popup-element" id="${widgetAttribute.id}">
                 <div class="popup-widget" draggable="true" data-type="${key}">
-                    <i class="${attr.icon}"></i>
-                    <label>${attr.name}</label>
+                    <span class="material-icons-outlined">${widgetAttribute.icon}</span>
+                    <label>${widgetAttribute.name}</label>
                 </div>
             </div>`
         })
 
         // render the markup into the sidebar
-        jQuery('.sidebar-container').html( `
+        jQuery('.aside__container').html( `
             <div class="widget-container">
                 ${componentMarkup.join('')}
             </div>

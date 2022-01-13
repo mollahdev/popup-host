@@ -1,8 +1,10 @@
-@import './utils/variables';
-@import './utils/extends';
-@import './utils/functions';
-@import './utils/mixins';
-@import './utils/spinner';
+$primary_color: #1C1E22;
+$secondary_color: #337EF7;
+$gradient_color: linear-gradient(to right bottom, $secondary_color, #8B7FFA);
+$grey_color: #DFDFDF;
+$white_color: #ffffff;
+$white_grey: #d3d3d3;
+$font:'Poppins', sans-serif;
 
 * {
     margin: 0;
@@ -10,72 +12,23 @@
     box-sizing: border-box;
 }
 
-.customizer {
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    button, a {
-        @extend %transition
-    }
-
-    #popup form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .element-dragover {
-        outline: 2px dashed css_var('primary_color');
-    }
-
-    .popup-widget-element {
-        display: inline-block;
-        text-align: center;
-        float: left;
-        
-        > div {
-            display: inline;
-        }
-        > div:hover {
-            outline: 2px dashed css_var('primary_color');
-        }
-
-        &:hover .remove-btn {
-            display: inline-block;
-        }
-    }
-
-    .container {
-        display: grid;
-        grid-template-columns: 400px auto;
-    }
-
-    .remove-btn {
-        background: #ffcaca;
-        color: red;
-        width: 30px;
-        display: inline-block;
-        height: 30px;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 400;
-        position: absolute;
-        left: 0%;
-        top: 0px;
-        border-radius: 50%;
-        display: none;
-        cursor: pointer;
-        
-        &:hover {
-            background: red;
-            color: #fff;
-        }
-        
-    }
-    
-
-    @import './layouts/slider';
-    @import './layouts/header';
-    @import './layouts/sidebar';
-    @import './layouts/content';
+html, body {
+    font-family: $font;
 }
+
+.customizer {
+    display: grid;
+    grid-template-columns: 400px auto;
+    height: 100vh;
+
+    .body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@import './components/sidebar';
+@import './components/widget-container';
+@import './components/slider';
+@import './components/spinner';

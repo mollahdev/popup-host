@@ -1,23 +1,30 @@
 import Sidebar from "./inc/sidebar";
 import GlobalControls from "./inc/global-controls";
 import widgets from "./widgets";
+import state from "./inc/state";
+import cssom from "./inc/cssom";
+
+
 class Customizer extends Sidebar {
 
     constructor() {
         super()
-        window.addEventListener('DOMContentLoaded', this.init.bind(this) );
+        window.addEventListener('DOMContentLoaded', this.loadSavedMarkup.bind(this) );
     }
 
     /**
      * 
      * 
      * Create controls for sidebar
-     * @class GlobalControls returns the global controls settings
+     * @var GlobalControls returns the global controls settings
      * 
      */ 
-    createControls(type) {
-        const settings = type === 'global-settings' ? this.globalControls : widgets[type];
-        this.createControlMarkup( settings, type )
+    createControls(type, uid) {
+        if( type === 'popup-settings' ) {
+            this.createControlMarkup( this.globalControls, 'global' )
+        } else {
+            this.createControlMarkup( widgets[type], uid )
+        }
     }
 
     /**
@@ -26,49 +33,34 @@ class Customizer extends Sidebar {
      * Create Widgets Markup for sidebar 
      * 
      */ 
-
     createWidget() {
         this.createWidgetMarkup()
     }
 
     /**
      * 
-     * on Save Changes 
+     * 
+     * On saving content 
      * 
      */ 
-    getStyles() {
-        const promise = new Promise ((resolve, reject) => {
-            const container = jQuery('.popup-widget-element');
-            let css = jQuery('#all-style').text();
-                css += jQuery('#stylesheet-global-settings').text();
-            container.each( (index, item) => {
-                css += jQuery(`#stylesheet-${item.id}`).text();
-            })
-            resolve(css);
-        })
-        return promise;
-    }
-
     onSaveChanges() {
-        const self = this;
+
         const btn = jQuery('.save-changes-btn');
         btn.on( 'click', function() {
             btn.addClass('is-loading');
-            
-            const markup = jQuery('#popup').parent().html();
-            
-            self.getStyles().then( response => {
-                const data = {
-                    css: response,
-                    html: markup,
-                }
-
+            const markup  = jQuery('.alpha-popup-builder').parent().html();
+            cssom.getCSS().then( css => {
                 jQuery.ajax({
                     type: "POST",
-                    data: data,
-                    url: 'https://bookerkit.com/popup-host/' + 'storage/write.php',
+                    data: {
+                        action: 'save',
+                        css: JSON.stringify( css ),
+                        html: JSON.stringify( markup ),
+                        storage: JSON.stringify( state.get() )
+                    },
+                    url: 'http://localhost/popup-host/' + 'storage/index.php',
                     success: function(){
-                    setTimeout(()=>{
+                        setTimeout(()=>{
                             btn.removeClass('is-loading');
                         },1000)
                     }
@@ -77,51 +69,67 @@ class Customizer extends Sidebar {
         })
     }
     
-    /**
-     * 
-     * 
-     * Generate stylesheet 
-     * 
-     */ 
-    generateStyleSheet( id = 'global-settings', isGlobal = true, css = '' ) {
-
-        if( jQuery(`#stylesheet-${id}`).length > 0 ) {
-            return false;
-        }
-
-        if( isGlobal ) {
-            jQuery('head').append(`<style id="stylesheet-${id}">` + this.globalControls.css + '</style>');
-        }
-        else {
-            jQuery('head').append(`<style id="stylesheet-${id}">` + css + '</style>');
-        }
-    }
 
     /**
      * 
      * 
      * Create widget markup 
+     * this method is responsible for creating unique id for widget wrapper
      * 
      */ 
-    onDropWidget( widget ) {
-
-        const controls = widget.controls;
-        if( widget.render ) {
-            const markup = widget.render();
-            let css = ''; 
-            jQuery('#popup form > .wrapper').append(markup)
-            jQuery('.popup-widget-element').draggable({ containment: 'parent' })
-
-            Object.values( controls ).forEach( control => {
-                if( control.selector ) {
-                    if( control.selector.call(control) ) {
-                        css += control.prefix + control.selector.call(control) + '\n\n';
-                    }
+    uid() {
+        let store = state.get();
+        const promise = new Promise((resolve, reject) => {
+            function generateUID() {
+                let uid = Math.floor((Math.random() * 10000) + 1);
+                if( Reflect.has( store, uid ) ) {
+                    generateUID();
+                } else {
+                    resolve(uid)
                 }
-            })
+            }
+            generateUID()
+        })
+        return promise;
+    }
 
-            this.generateStyleSheet( `${widget.sheet}`, false, css )
-        }
+    onDropWidget( widget ) {
+        this.uid().then( wrapperId => {
+            
+            /**
+             * 
+             * 
+             * @var name widget name
+             * @var id widget id
+             * @render function for creating markup 
+             * 
+             */ 
+            const { name, id, render } = widget.widgetAttribute;
+            state.add(wrapperId, {})
+            const data = state.get()[wrapperId];
+
+            // generate markup 
+            if( typeof render === 'function' ) {
+                const markup = render( wrapperId );
+                jQuery('.alpha-popup-builder .apb-wrapper').append(markup)
+                jQuery('.popup-widget-element').draggable({ containment: 'parent' })
+                jQuery('.panel--info').text(name);
+                
+                // generate style from default values
+                Object.entries( widget ).map(([prop, attr]) => {
+                    if( prop !== 'widgetAttribute' && attr.selector ) {
+                        // use default value
+                        data[prop] = attr.default;
+                        // generate css
+                        const initialStyle = attr.selector( '.apb-' + wrapperId, data[prop] );
+                        if( initialStyle ) {
+                            const { selector, style } = cssom.seperateStyle( initialStyle );
+                            cssom.insert(selector, style)
+                        }
+                    }
+                })
+            }
+        }) // end of promise
     }
 
 
@@ -132,13 +140,13 @@ class Customizer extends Sidebar {
      * 
      */ 
     dropWidget( self ) {
-        // make widget panel element dragable
+        //make widget panel element dragable
         jQuery('.popup-widget').draggable({
             helper: 'clone'
         })
 
         // make preview panel widget draggable
-        const container = jQuery(document).find("#popup form > .wrapper");
+        const container = jQuery(document).find(".alpha-popup-builder");
         container.droppable({
             accept: '.popup-widget', 
             drop: function( event, ui ) {
@@ -157,7 +165,22 @@ class Customizer extends Sidebar {
         jQuery(document).on('click', '.remove-btn', function(ev){
             ev.preventDefault();
             ev.stopPropagation();
-            jQuery(this).parent().remove();
+            const element = jQuery(this).parent();
+            const uid = element.data('uid')
+            const widgetId = element.attr('id');
+            const widget = widgets[widgetId]
+            const selector = new Set();
+            state.remove( uid )
+            Object.entries( widget ).map(([prop, attr]) => {
+                if( prop !== 'widgetAttribute' && attr.selector ) {
+                    const initialStyle = attr.selector( '.apb-' + uid, '' );
+                    if( initialStyle ) {
+                        selector.add( cssom.seperateStyle( initialStyle ).selector );
+                    }
+                }
+            })
+            cssom.delete( Array.from(selector) );
+            element.remove();
         })
     }
 
@@ -168,27 +191,56 @@ class Customizer extends Sidebar {
      * 
      */ 
     loadSavedMarkup() {
-         const self = this;
-         fetch( 'https://bookerkit.com/popup-host/' + 'storage/read.php?file=markup.txt')
-        .then( response => response.text())
-        .then( response => {
 
-            const data = {
-                html: response
+        const self = this;
+        fetch( 'http://localhost/popup-host/' + 'storage/index.php?all')
+        .then( response => response.json())
+        .then( response => {
+            
+            const { html, storage } = response.body;
+
+            if( storage ) {
+                state.set( JSON.parse( storage ) )
             }
 
-            fetch( 'https://bookerkit.com/popup-host/'+ 'storage/read.php?file=style.txt')
-            .then( response => response.text())
-            .then( response => {
-                data.css = response; 
+            if( html ) {
+                // load the markup into the dom
+                jQuery('.alpha-popup-builder').parent().html(JSON.parse(html));
+                // restore saved css 
+                jQuery('.popup-widget-element').each( (i, item) =>{
+                    const wrapperId     = item.dataset.uid;
+                    const widgetConfig  = widgets[item.id]
+                    const data          = state.get()[wrapperId];
 
-                if( data.html.length > 0 && data.css.length > 0 ) {
-                    jQuery('#popup').parent().html(data.html);
-                    jQuery('head').prepend(`<style id="all-style">` + data.css + '</style>');
-                    self.dropWidget( self );
-                    jQuery('.popup-widget-element').draggable({ containment: 'parent' })
-                }
-            })
+                     // generate style from default values
+                    Object.entries( widgetConfig ).map(([prop, attr]) => {
+                        if( prop !== 'widgetAttribute' && attr.selector ) {
+                            
+                            if( !Reflect.has( data, prop ) ) {
+                                data[prop] =  attr.default;
+                            }
+
+                            const initialStyle = attr.selector( '.apb-' + wrapperId, data[prop] );
+                            if( initialStyle ) {
+                                const { selector, style } = cssom.seperateStyle( initialStyle );
+                                cssom.insert(selector, style)
+                            }
+                        }
+                    })
+                })
+                
+                // enable drag and drop 
+                self.dropWidget( self );
+                jQuery('.popup-widget-element').draggable({ containment: 'parent' })
+            }
+
+            /**
+             * 
+             * After loading the entire saved markup and style load the drag and drop functionility
+             * 
+             */ 
+            self.init.call( self );
+            
         })
     }
 
@@ -203,30 +255,38 @@ class Customizer extends Sidebar {
         const self = this;
         self.globalControls = new GlobalControls();
         self.sidebarInit();
-        self.loadSavedMarkup();
+        self.createControls('popup-settings');
         self.createWidget();
         self.onSaveChanges();
-        self.generateStyleSheet();
         self.dropWidget( self );
         self.removeWidget( self );
 
         // change sidebar markup based on what settings user want 
-        jQuery(document).on('click', '.page-settings, .all-widget, .popup-widget-element', function(ev) {
+        jQuery(document).on('click', '.aside-btn, .popup-widget-element', function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
             
             const type = this.dataset.type;
+            // toggle the active class
+            if( ['popup-settings', 'widget-settings'].includes(type) ) {
+                jQuery('.aside-btn').removeClass('active');
+                this.classList.add('active');
+            }
+
             switch( type ) {
-                case 'global-settings': // when global settings button clicked
+                case 'popup-settings': // when popup settings button clicked
                 self.createControls.call(self, type);
+                jQuery('.panel--info').text('Popup Settings');
                 break;
                 
-                case 'all-widgets': // when all widgets button clicked
+                case 'widget-settings': // when all widgets button clicked
+                jQuery('.panel--info').text('Widgets List');
                 self.createWidget.call(self, type);
                 break;
                 
                 case 'widget': // when individual widget is clicked
-                self.createControls.call(self, this.id);
+                jQuery('.aside-btn').removeClass('active');
+                self.createControls.call(self, this.id, this.dataset.uid);
                 break;
             }
 
