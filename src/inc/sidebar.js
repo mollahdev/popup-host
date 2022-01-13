@@ -38,20 +38,23 @@ export default class Sidebar {
         const componentMarkup = Object.keys(config).map( key => {
             const attr = config[key];
             const component = ControlBase[attr.type]
+            let value = '';
             
             if( !component ) {
                 return '';
             }
 
+
             // use already saved values
             if( !Reflect.has( data, key ) ) {
                 data[key] = attr.default;
+                value = data[key];
             } else {
-                attr.default = data[key];
+                value = data[key];
             }
 
             // generate css
-            const initialStyle = attr.selector( wrapper, data[key] );
+            const initialStyle = attr.selector( wrapper, value );
             if( initialStyle ) {
                 const { selector, style } = cssom.seperateStyle( initialStyle );
                 cssom.insert(selector, style)
@@ -61,7 +64,7 @@ export default class Sidebar {
                 <div class="control-item" data-inline="${attr.isLabelInline}">
                     <label> ${ attr.label } </label>
                     <div class="control-item--field field-type-${attr.type}">
-                        ${component(attr, key)}
+                        ${component({...attr, default: value}, key)}
                     </div>
                 </div>
             `
