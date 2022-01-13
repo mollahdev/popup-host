@@ -3,13 +3,14 @@ export default class StarWidget extends ControlBase {
 
     constructor() {
         super();
+        return this.config;
+    }
+
+    setWidgetAttribute() {
         return {
-            controls: this.config,
-            css: this.css,
-            sheet: 'star_widget',
-            icon: 'popup-widgets',
-            name: 'Star',
-            render: this.render.bind( this.config )
+            id: 'star_widget',
+            icon: 'star',
+            name: 'Star'
         }
     }
 
@@ -20,9 +21,9 @@ export default class StarWidget extends ControlBase {
             type: 'color',
             default: '#c75943',
             isLabelInline: true,
-            selector: function() {
-                return `#star_widget span {
-                    color: ${this.default};
+            selector: function( wrapper, value ) {
+                return `${wrapper} span {
+                    color: ${value};
                 }`
             }
         })
@@ -33,21 +34,33 @@ export default class StarWidget extends ControlBase {
             default: 44,
             max: 200,
             step:1,
-            selector: function() {
-                return `#star_widget span {
-                    display: inline-block;
-                    font-size: ${this.default}px;
+            selector: function( wrapper, value ) {
+                return `${wrapper} span {
+                    font-size: ${value}px;
+                    display: unset;
+                }`
+            }
+        })
+
+        this.addControl('zindex', {
+            label: 'Z-Index',
+            type: 'number',
+            default: 1,
+            isLabelInline: true,
+            selector: function( wrapper, value ) {
+                return `${wrapper} {
+                    z-index: ${value};
                 }`
             }
         })
     }
 
-    render() {
+    render( wrapper_id ) {
         return `
-            <div class="popup-widget-element" id="star_widget" data-type="widget">
+            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" id="star_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
-                    <span class="popup-star"></span>
+                    <span class="material-icons-outlined">star</span>
                 </div>
             </div>
         `

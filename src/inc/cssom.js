@@ -89,12 +89,14 @@
                 let value = item.split(':')[1]
                 if( property && value ) {
                     
+                    
+
                     const isImportant = value.includes('important') ? 'important' : '';
                     if( isImportant === 'important' ) {
                         value = value.split('!')[0];
                     } 
-
-                    style.setProperty(property, value.trim(), isImportant );
+                    
+                    style.setProperty(property.trim(), value.trim(), isImportant );
                     this.rule[selector].style = style.cssText;
                     
                 }

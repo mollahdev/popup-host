@@ -68,16 +68,29 @@ export default class TextWidget extends ControlBase {
             }
         })
         
-        this.addControl('text_padding_x', {
-            label: 'Padding X',
+        
+        this.addControl('text_width', {
+            label: 'Width',
             type: 'slider',
-            default: 20,
-            max: 600,
+            default: 250,
+            max: 800,
             step:1,
             selector: function( wrapper, value ) {
                 return `${wrapper} span {
-                    padding-left: ${value}px;
-                    padding-right: ${value}px;
+                    width: ${value}px;
+                    display: inline-block;
+                }`
+            }
+        })
+
+        this.addControl('zindex', {
+            label: 'Z-Index',
+            type: 'number',
+            default: 1,
+            isLabelInline: true,
+            selector: function( wrapper, value ) {
+                return `${wrapper} {
+                    z-index: ${value};
                 }`
             }
         })

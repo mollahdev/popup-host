@@ -74,11 +74,28 @@ export default class ControlBase {
             />`
         )
     }
+    
+    /**
+     * 
+     * 
+     * number control 
+     * 
+     */ 
+    static number( props, key ) {
+        return (
+            `<input 
+                value="${props.default}" 
+                data-key=${key} 
+                type="number" 
+                class="popup-control--trigger"
+            />`
+        )
+    }
 
     /**
      * 
      * 
-     * text control 
+     * color control 
      * 
      */ 
     static color( props, key ) {

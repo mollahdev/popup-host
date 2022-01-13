@@ -1,9 +1,9 @@
-.customizer__content {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #999;
-    min-height: calc(100vh - 50px);
-    overflow: hidden;
+.popup-widget-element {
+    display: inline-block;
+    position: absolute !important;
+    cursor: grab;
+
+    &:hover {
+        outline: 1px dashed $primary_color;
+    }
 }

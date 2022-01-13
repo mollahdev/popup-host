@@ -98,8 +98,8 @@ html, body {
 	grid-gap: 15px;
 }
 
-.control-container input[type="text"], .control-container select {
-	padding: 10px;
+.control-container input[type="text"], .control-container select, .control-container input[type="number"] {
+	padding: 7px;
 	font-size: 14px;
 }
 
@@ -120,7 +120,7 @@ html, body {
 }
 
 .control-item[data-inline="true"] .control-item--field {
-	width: 60px;
+	width: 80px;
 }
 
 .control-item[data-inline="true"] .control-item--field input {
@@ -230,4 +230,14 @@ html, body {
 	border-radius: 4px;
 	margin-left: -2px;
 	background: #fff;
+}
+
+.popup-widget-element {
+	display: inline-block;
+	position: absolute !important;
+	cursor: grab;
+}
+
+.popup-widget-element:hover {
+	outline: 1px dashed #1C1E22;
 }

@@ -1,1 +1,1 @@
-{"7172":{"text_content":"two","text_font_weight":400,"text_color":"#ffffff","text_font_size":"100","text_padding_x":"203"},"8046":{"text_content":"ONe","text_font_weight":400,"text_color":"#ffffff","text_font_size":18,"text_padding_x":20},"global":{"global_popup_bg":"#616161","global_popup_radius":500,"global_popup_width":600,"global_popup_height":600}}
+{"global":{"global_popup_bg":"#d59a9a","global_popup_radius":"0","global_popup_width":600,"global_popup_height":600}}

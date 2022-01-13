@@ -6,8 +6,8 @@
 
 
 .control-container {
-    input[type="text"], select {
-        padding: 10px;
+    input[type="text"], select, input[type="number"] {
+        padding: 7px;
         font-size: 14px;
     }
 
@@ -27,7 +27,7 @@
         justify-content: space-between;
 
         .control-item--field {
-            width: 60px;
+            width: 80px;
             input {
                 margin: 0 !important;
             }
