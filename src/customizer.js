@@ -93,7 +93,7 @@ class Customizer extends Sidebar {
         return promise;
     }
 
-    onDropWidget( widget ) {
+    onDropWidget( widget, position ) {
         this.uid().then( wrapperId => {
             
             /**
@@ -111,7 +111,9 @@ class Customizer extends Sidebar {
             // generate markup 
             if( typeof render === 'function' ) {
                 const markup = render( wrapperId );
+
                 jQuery('.alpha-popup-builder .apb-wrapper').append(markup)
+                jQuery('.apb-' + wrapperId).css(position)
                 jQuery('.popup-widget-element').draggable({ containment: 'parent' })
                 jQuery('.panel--info').text(name);
                 
@@ -151,7 +153,7 @@ class Customizer extends Sidebar {
             accept: '.popup-widget', 
             drop: function( event, ui ) {
                 const type = ui.draggable.data('type');
-                self.onDropWidget( widgets[type] )
+                self.onDropWidget( widgets[type], ui.position );
             }
         });
     }

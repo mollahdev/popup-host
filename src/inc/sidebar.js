@@ -98,9 +98,8 @@ export default class Sidebar {
             if( createStyle ) {
                 const { selector, style } = cssom.seperateStyle( createStyle );
                 cssom.insert(selector, style)
-
             }
-            
+
             //update range slider value
             if( this.type === 'range' ) {
                 this.nextElementSibling.innerText = value + 'px'

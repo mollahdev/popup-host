@@ -11,6 +11,7 @@
  */ 
 
  class StylesheetManager {
+    
     rule = {};
     constructor( id ) {
         this.styleSheetId = id;
@@ -89,8 +90,6 @@
                 let value = item.split(':')[1]
                 if( property && value ) {
                     
-                    
-
                     const isImportant = value.includes('important') ? 'important' : '';
                     if( isImportant === 'important' ) {
                         value = value.split('!')[0];
@@ -98,11 +97,10 @@
                     
                     style.setProperty(property.trim(), value.trim(), isImportant );
                     this.rule[selector].style = style.cssText;
-                    
                 }
             })
 
-        }else {
+        } else {
             this.rule[selector] = {
                 index: this.length, 
                 style: newStyle
