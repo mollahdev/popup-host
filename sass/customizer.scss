@@ -1,11 +1,4 @@
-$primary_color: #1C1E22;
-$secondary_color: #337EF7;
-$gradient_color: linear-gradient(to right bottom, $secondary_color, #8B7FFA);
-$grey_color: #DFDFDF;
-$white_color: #ffffff;
-$white_grey: #d3d3d3;
-$font:'Poppins', sans-serif;
-
+@import './components/variables';
 * {
     margin: 0;
     padding: 0;

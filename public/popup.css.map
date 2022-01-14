@@ -2,8 +2,10 @@
 	"version": 3,
 	"file": "popup.css",
 	"sources": [
-		"../sass/popup.scss"
+		"../sass/popup.scss",
+		"../sass/components/_variables.scss",
+		"../sass/components/_content.scss"
 	],
 	"names": [],
-	"mappings": ""
+	"mappings": "AACA,AAAA,oBAAoB,CAAC;CACjB,WAAW,ECIT,SAAS,EAAE,UAAU;CDH1B;;AEKD,AAPI,oBAOgB,CAPhB,qBAAqB,CAAC;CAClB,OAAO,EAAE,YAAY;CACrB,QAAQ,EAAE,mBAAmB;CAChC;;AAQL,AACI,IADA,AAAA,WAAW,CACX,qBAAqB,CAAC;CAClB,MAAM,EAAE,IAAI;CAIf;;AANL,AAGQ,IAHJ,AAAA,WAAW,CACX,qBAAqB,AAEhB,MAAM,CAAC;CACJ,OAAO,EAAE,GAAG,CAAC,MAAM,CDhBf,OAAO;CCiBd;;AAKT,AACI,IADA,AAAA,WAAW,CACX,WAAW,CAAC;CACR,OAAO,EAAE,IAAI;CAChB"
 }

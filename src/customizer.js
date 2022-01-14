@@ -26,6 +26,8 @@ class Customizer extends Sidebar {
         if( type === 'popup-settings' ) {
             this.createControlMarkup( this.globalControls, 'global' )
         } else {
+            const widgetName = widgets[type].widgetAttribute.name;
+            jQuery('.panel--info').text( widgetName );
             this.createControlMarkup( widgets[type], uid )
         }
     }

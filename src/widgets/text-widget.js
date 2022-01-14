@@ -42,6 +42,22 @@ export default class TextWidget extends ControlBase {
                 }`
             }
         })
+        
+        this.addControl('text_alignment', {
+            label: 'Alignment',
+            type: 'select',
+            default: 'center',
+            options: {
+                left: 'Left',
+                center: 'Center',
+                right: 'Right'
+            },
+            selector: function( wrapper, value ) {
+                return `${wrapper} span {
+                    text-align: ${value};
+                }`
+            }
+        })
 
         this.addControl('text_color', {
             label: 'Text Color',

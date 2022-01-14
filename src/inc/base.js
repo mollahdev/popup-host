@@ -48,7 +48,7 @@ export default class ControlBase {
                 ${
                     (()=>{
                         const options = Object.keys(props.options).map( item =>{
-                            return `<option value="${item}">${props.options[item]}</option>`
+                            return `<option ${item == props.default ? 'selected' : ''} value="${item}">${props.options[item]}</option>`
                         })
                         return options.join('');
                     })()

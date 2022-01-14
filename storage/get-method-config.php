@@ -11,11 +11,22 @@ final class Get_Method_Config {
       $data['storage'] = \utility\Helper::read('storage');
       \utility\Helper::printResponse(200, $data);
    }
+   
+   private static function public() {
+      $data = [];
+      $data['html']  = \utility\Helper::read('html');
+      $data['css']   = \utility\Helper::read('css');
+      \utility\Helper::printResponse(200, $data);
+   }
 
    public static function router() {
       if( isset($_GET['all']) ) {
          self::get_all();
       }
+      else if( isset($_GET['public']) ) {
+         self::public();
+      }
+
       else {
          \utility\Helper::printResponse(400);
       }

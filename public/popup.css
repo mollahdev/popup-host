@@ -1,0 +1,20 @@
+.alpha-popup-builder {
+	font-family: "Poppins", sans-serif;
+}
+
+.alpha-popup-builder .popup-widget-element {
+	display: inline-block;
+	position: absolute !important;
+}
+
+body.customizer .popup-widget-element {
+	cursor: grab;
+}
+
+body.customizer .popup-widget-element:hover {
+	outline: 1px dashed #1C1E22;
+}
+
+body.popup-init .remove-btn {
+	display: none;
+}

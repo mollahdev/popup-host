@@ -1,9 +1,27 @@
-.popup-widget-element {
-    display: inline-block;
-    position: absolute !important;
-    cursor: grab;
+%common_style {
+    .popup-widget-element {
+        display: inline-block;
+        position: absolute !important;
+    }
+}
 
-    &:hover {
-        outline: 1px dashed $primary_color;
+// for customizer
+.alpha-popup-builder {
+    @extend %common_style;
+}
+
+body.customizer {
+    .popup-widget-element {
+        cursor: grab;
+        &:hover {
+            outline: 1px dashed $primary_color;
+        }
+    }
+}
+
+// for public
+body.popup-init {
+    .remove-btn {
+        display: none;
     }
 }

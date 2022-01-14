@@ -70,7 +70,7 @@ export default class Utility {
                 }
             }
         })
-        console.log(selector)
+
         cssom.delete( Array.from(selector) );
     }
 

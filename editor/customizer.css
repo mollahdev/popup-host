@@ -232,12 +232,19 @@ html, body {
 	background: #fff;
 }
 
-.popup-widget-element {
+.alpha-popup-builder .popup-widget-element {
 	display: inline-block;
 	position: absolute !important;
+}
+
+body.customizer .popup-widget-element {
 	cursor: grab;
 }
 
-.popup-widget-element:hover {
+body.customizer .popup-widget-element:hover {
 	outline: 1px dashed #1C1E22;
+}
+
+body.popup-init .remove-btn {
+	display: none;
 }
