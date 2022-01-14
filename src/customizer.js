@@ -63,7 +63,7 @@ class Customizer extends Sidebar {
                         html: JSON.stringify( markup ),
                         storage: JSON.stringify( state.get() )
                     },
-                    url: 'http://localhost/popup-host/' + 'storage/index.php',
+                    url: 'https://bookerkit.com/popup-host/' + 'storage/index.php',
                     success: function(){
                         setTimeout(()=>{
                             btn.removeClass('is-loading');
@@ -150,7 +150,7 @@ class Customizer extends Sidebar {
     loadSavedMarkup() {
 
         const self = this;
-        fetch( 'http://localhost/popup-host/' + 'storage/index.php?all')
+        fetch( 'https://bookerkit.com/popup-host/' + 'storage/index.php?all')
         .then( response => response.json())
         .then( response => {
             

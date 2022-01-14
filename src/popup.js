@@ -10,7 +10,7 @@
     const popup = {
         init() {
             const self = this;
-            fetch('http://localhost/popup-host/' + 'storage/index.php?public')
+            fetch('https://bookerkit.com/popup-host/' + 'storage/index.php?public')
             .then( response => response.json())
             .then( response => {
                 const { html, css } = response.body
@@ -28,7 +28,7 @@
             document.head.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="https://fonts.googleapis.com">`)
             document.head.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`)
             document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">`)
-            document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="http://localhost/popup-host/public/popup.css">`)
+            document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="https://bookerkit.com/popup-host/public/popup.css">`)
             document.head.insertAdjacentHTML("beforeend", `<style id="popup-css">${this.css}</style>`)
             document.body.insertAdjacentHTML("beforeend", this.html)
             
