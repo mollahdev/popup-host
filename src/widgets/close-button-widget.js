@@ -3,13 +3,14 @@ export default class CloseButtonWidget extends ControlBase {
 
     constructor() {
         super();
+        return this.config
+    }
+
+    setWidgetAttribute() {
         return {
-            controls: this.config,
-            css: this.css,
-            sheet: 'close_button_widget',
-            icon: 'popup-widgets',
-            name: 'Close Button',
-            render: this.render.bind( this.config )
+            id: 'close_button_widget',
+            icon: 'disabled_by_default',
+            name: 'Close Button'
         }
     }
 
@@ -19,10 +20,10 @@ export default class CloseButtonWidget extends ControlBase {
             label: 'Button Label',
             type: 'text',
             default: 'Remove',
-            selector: function() {
-                const scope = jQuery(this.prefix)
+            selector: function( wrapper, value ) {
+                const scope = jQuery(wrapper)
                 if( scope.length ) {
-                    scope.find('#close_button_widget .button').text(this.default)
+                    scope.find('.button').text(value)
                 }
             }
         })
@@ -33,9 +34,9 @@ export default class CloseButtonWidget extends ControlBase {
             default: 20,
             max: 100,
             step:1,
-            selector: function() {
-                return `#close_button_widget .button {
-                    font-size: ${this.default}px
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button {
+                    font-size: ${value}px;
                 }`
             }
         })
@@ -46,10 +47,10 @@ export default class CloseButtonWidget extends ControlBase {
             default: 20,
             max: 200,
             step:1,
-            selector: function() {
-                return `#close_button_widget .button {
-                    padding-left: ${this.default}px;
-                    padding-right: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button {
+                    padding-left: ${value}px;
+                    padding-right: ${value}px;
                 }`
             }
         })
@@ -57,13 +58,13 @@ export default class CloseButtonWidget extends ControlBase {
         this.addControl('button_padding_y', {
             label: 'Padding Y',
             type: 'slider',
-            default: 20,
+            default: 10,
             max: 200,
             step:1,
-            selector: function() {
-                return `#close_button_widget .button{
-                    padding-top: ${this.default}px;
-                    padding-bottom: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button{
+                    padding-top: ${value}px;
+                    padding-bottom: ${value}px;
                 }`
             }
         })
@@ -71,12 +72,12 @@ export default class CloseButtonWidget extends ControlBase {
         this.addControl('button_radius', {
             label: 'Border Radius',
             type: 'slider',
-            default: 20,
+            default: 35,
             max: 200,
             step:1,
-            selector: function() {
-                return `#close_button_widget .button{
-                    border-radius: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button{
+                    border-radius: ${value}px;
                 }`
             }
         })
@@ -86,10 +87,10 @@ export default class CloseButtonWidget extends ControlBase {
             type: 'color',
             default: '#B02827',
             isLabelInline: true,
-            selector: function() {
-                return `#close_button_widget .button {
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button {
                     display: inline-block;
-                    color: ${this.default};
+                    color: ${value};
                 }`
             }
         })
@@ -99,10 +100,10 @@ export default class CloseButtonWidget extends ControlBase {
             type: 'color',
             default: '#414142',
             isLabelInline: true,
-            selector: function() {
-                return `#close_button_widget .button:hover {
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button:hover {
                     display: inline-block;
-                    color: ${this.default};
+                    color: ${value};
                 }`
             }
         })
@@ -112,10 +113,10 @@ export default class CloseButtonWidget extends ControlBase {
             type: 'color',
             default: '#ffffff',
             isLabelInline: true,
-            selector: function() {
-                return `#close_button_widget .button {
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button {
                     cursor:pointer;
-                    background: ${this.default};
+                    background: ${value};
                 }`
             }
         })
@@ -125,17 +126,30 @@ export default class CloseButtonWidget extends ControlBase {
             type: 'color',
             default: '#B02827',
             isLabelInline: true,
-            selector: function() {
-                return `#close_button_widget .button:hover {
-                    background: ${this.default};
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button:hover {
+                    background: ${value};
                 }`
             }
         })
+        
+        this.addControl('zindex', {
+            label: 'Z-Index',
+            type: 'number',
+            default: 1,
+            isLabelInline: true,
+            selector: function( wrapper, value ) {
+                return `${wrapper} {
+                    z-index: ${value};
+                }`
+            }
+        })
+
     }
 
-    render(uid = '') {
+    render(wrapper_id) {
         return `
-            <div class="popup-widget-element" id="close_button_widget" data-type="widget">
+            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" id="close_button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="button popup-close-button">${this.button_content.default}</span>

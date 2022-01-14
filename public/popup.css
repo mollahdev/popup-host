@@ -7,14 +7,86 @@
 	position: absolute !important;
 }
 
+.alpha-popup-builder .popup-widget-element * {
+	box-sizing: border-box;
+}
+
+.alpha-popup-builder .apb-wrapper {
+	box-sizing: content-box;
+}
+
+@keyframes popup {
+	0% {
+		transform: translate(-50%, -20%) scale(0.2);
+	}
+}
+
+body.customizer .alpha-popup-builder {
+	outline: 1px dashed #d4d4d4;
+}
+
 body.customizer .popup-widget-element {
 	cursor: grab;
 }
 
 body.customizer .popup-widget-element:hover {
 	outline: 1px dashed #1C1E22;
+	z-index: 9999;
+}
+
+body.customizer .popup-widget-element:hover .remove-btn {
+	display: inline-block;
+}
+
+body.customizer .popup-widget-element input[type="email"] {
+	pointer-events: none;
+}
+
+body.customizer .popup-widget-element .remove-btn {
+	position: absolute;
+	position: absolute;
+	background: #ffbaba;
+	font-style: normal;
+	color: red;
+	display: none;
+	width: 30px;
+	text-align: center;
+	z-index: 99;
+	cursor: pointer;
+}
+
+body.customizer .popup-widget-element .remove-btn:hover {
+	background: red;
+	color: #fff;
 }
 
 body.popup-init .remove-btn {
 	display: none;
+}
+
+body.popup-init .alpha-popup-builder {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	display: none;
+	z-index: 99996;
+	transform: translate(-50%, -50%) scale(1);
+}
+
+body.popup-init.show-popup .alpha-popup-builder {
+	animation-name: popup;
+	display: unset;
+	animation-duration: 1s;
+}
+
+@media only screen and (max-width: 900px) {
+	body.popup-init .alpha-popup-builder {
+		transform: translate(-50%, -50%) scale(0.6);
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	body.popup-init .alpha-popup-builder {
+		transform: translate(-50%, -50%) scale(0.5);
+	}
 }

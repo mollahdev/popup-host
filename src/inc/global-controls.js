@@ -24,6 +24,34 @@ export default class GlobalControls extends ControlBase {
             selector: function( wrapper, value ) {
                 return `${wrapper} .apb-wrapper {
                     background-color: ${value};
+                    box-shadow:0 0 0 var(--border-width) ${value};
+                }`
+            }
+        })
+        
+        this.addControl('global_popup_border_color', {
+            label: 'Popup Border Color',
+            type: 'color',
+            default: '#eeeeee',
+            isLabelInline: true,
+            selector: function( wrapper, value ) {
+                return `${wrapper} .apb-wrapper {
+                    border-color: ${value};
+                    border-style: solid;
+                }`
+            }
+        })
+
+        this.addControl('global_popup_border_width', {
+            label: 'Popup Border Width',
+            type: 'slider',
+            default: 5,
+            max: 50,
+            step:1,
+            selector: function( wrapper, value ) {
+                jQuery(`${wrapper} .apb-wrapper`).css({'--border-width': (value * 2) + 'px'});
+                return `${wrapper} .apb-wrapper {
+                    border-width: ${value}px;
                 }`
             }
         })

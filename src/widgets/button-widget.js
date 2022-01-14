@@ -4,13 +4,14 @@ export default class ButtonWidget extends ControlBase {
 
     constructor() {
         super();
+        return this.config;
+    }
+
+    setWidgetAttribute() {
         return {
-            controls: this.config,
-            css: this.css,
-            sheet: 'button_widget',
-            icon: 'popup-widgets',
-            name: 'Button Widget',
-            render: this.render.bind( this.config )
+            id: 'button_widget',
+            icon: 'smart_button',
+            name: 'Submit Button'
         }
     }
 
@@ -20,23 +21,39 @@ export default class ButtonWidget extends ControlBase {
             label: 'Button Label',
             type: 'text',
             default: 'SIGNUP NOW',
-            selector: function() {
-                const scope = jQuery(this.prefix)
+            selector: function( wrapper, value ) {
+                const scope = jQuery(wrapper)
                 if( scope.length ) {
-                    scope.find('#button_widget .button').text(this.default)
+                    scope.find('.button').text(value)
                 }
+            }
+        })
+
+        this.addControl('button_weight', {
+            label: 'Font Weight',
+            type: 'select',
+            default: 700,
+            options: {
+                400: 'Regular',
+                700: 'Medium',
+                900: 'Bold'
+            },
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button {
+                    font-weight: ${value};
+                }`
             }
         })
 
         this.addControl('button_padding_font_size', {
             label: 'Font Size',
             type: 'slider',
-            default: 20,
+            default: 24,
             max: 100,
             step:1,
-            selector: function() {
-                return `#button_widget .button{
-                    font-size: ${this.default}px
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button{
+                    font-size: ${value}px;
                 }`
             }
         })
@@ -44,13 +61,13 @@ export default class ButtonWidget extends ControlBase {
         this.addControl('button_padding_x', {
             label: 'Padding X',
             type: 'slider',
-            default: 20,
+            default: 97,
             max: 200,
             step:1,
-            selector: function() {
-                return `#button_widget .button{
-                    padding-left: ${this.default}px;
-                    padding-right: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button{
+                    padding-left: ${value}px;
+                    padding-right: ${value}px;
                 }`
             }
         })
@@ -58,13 +75,13 @@ export default class ButtonWidget extends ControlBase {
         this.addControl('button_padding_y', {
             label: 'Padding Y',
             type: 'slider',
-            default: 20,
+            default: 15,
             max: 200,
             step:1,
-            selector: function() {
-                return `#button_widget .button{
-                    padding-top: ${this.default}px;
-                    padding-bottom: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button{
+                    padding-top: ${value}px;
+                    padding-bottom: ${value}px;
                 }`
             }
         })
@@ -75,9 +92,9 @@ export default class ButtonWidget extends ControlBase {
             default: 20,
             max: 200,
             step:1,
-            selector: function() {
-                return `#button_widget .button{
-                    border-radius: ${this.default}px;
+            selector: function(wrapper, value) {
+                return `${wrapper} .button{
+                    border-radius: ${value}px;
                 }`
             }
         })
@@ -87,10 +104,10 @@ export default class ButtonWidget extends ControlBase {
             type: 'color',
             default: '#ffffff',
             isLabelInline: true,
-            selector: function() {
-                return `#button_widget .button {
+            selector: function(wrapper, value) {
+                return `${wrapper} .button {
                     display: inline-block;
-                    color: ${this.default};
+                    color: ${value};
                 }`
             }
         })
@@ -100,10 +117,10 @@ export default class ButtonWidget extends ControlBase {
             type: 'color',
             default: '#414142',
             isLabelInline: true,
-            selector: function() {
-                return `#button_widget .button:hover {
+            selector: function( wrapper, value ) {
+                return `${wrapper} .button:hover {
                     display: inline-block;
-                    color: ${this.default};
+                    color: ${value};
                 }`
             }
         })
@@ -113,9 +130,11 @@ export default class ButtonWidget extends ControlBase {
             type: 'color',
             default: '#414142',
             isLabelInline: true,
-            selector: function() {
-                return `#button_widget .button {
-                    background: ${this.default};
+            selector: function(wrapper, value) {
+                return `${wrapper} .button {
+                    background: ${value};
+                    user-select: none;
+                    cursor: pointer;
                 }`
             }
         })
@@ -125,17 +144,29 @@ export default class ButtonWidget extends ControlBase {
             type: 'color',
             default: '#ffffff',
             isLabelInline: true,
-            selector: function() {
-                return `#button_widget .button:hover {
-                    background: ${this.default};
+            selector: function(wrapper, value) {
+                return `${wrapper} .button:hover {
+                    background: ${value};
+                }`
+            }
+        })
+
+        this.addControl('zindex', {
+            label: 'Z-Index',
+            type: 'number',
+            default: 1,
+            isLabelInline: true,
+            selector: function( wrapper, value ) {
+                return `${wrapper} {
+                    z-index: ${value};
                 }`
             }
         })
     }
 
-    render() {
+    render( wrapper_id ) {
         return `
-            <div class="popup-widget-element" id="button_widget" data-type="widget">
+            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" id="button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="button submit-btn">${this.button_content.default}</span>
@@ -144,6 +175,5 @@ export default class ButtonWidget extends ControlBase {
         `
     }
     
-
 }
 

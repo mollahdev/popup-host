@@ -98,6 +98,19 @@ export default class TextWidget extends ControlBase {
                 }`
             }
         })
+        
+        this.addControl('text_line_height', {
+            label: 'Line Height',
+            type: 'slider',
+            default: 24,
+            max: 200,
+            step:1,
+            selector: function( wrapper, value ) {
+                return `${wrapper} span {
+                    line-height: ${value}px;
+                }`
+            }
+        })
 
         this.addControl('zindex', {
             label: 'Z-Index',
