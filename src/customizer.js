@@ -77,7 +77,7 @@ class Customizer extends Sidebar {
     onDropWidget( widget, position ) {
         Utility.uid().then( wrapperId => {
             
-            const { name, id, render } = widget.widgetAttribute;
+            const { name, render } = widget.widgetAttribute;
             state.add(wrapperId, {})
 
             // generate markup 
@@ -129,14 +129,21 @@ class Customizer extends Sidebar {
      * 
      */ 
     removeWidget( ) {
+        const self = this;
         jQuery(document).on('click', '.remove-btn', function(ev){
             ev.preventDefault();
             ev.stopPropagation();
             const element   = jQuery(this).parent();
             const uid       = element.data('uid')
-            const widgetId  = element.attr('id');
-            const widget    = widgets[widgetId]
+            const key       = element.data('name');
+            const widget    = widgets[key];
+
             Utility.removeControl(widget, uid)
+            jQuery('.panel--info').text('Widgets List');
+            self.createWidget.call(self, 'widget-settings');
+            self.sidebarSettings.ps.update()
+            self.dropWidget( self );
+            self.removeWidget( self );
             element.remove();
         })
     }
@@ -166,7 +173,7 @@ class Customizer extends Sidebar {
                 // restore saved css 
                 jQuery('.popup-widget-element').each( (i, item) =>{
                     const wrapperId     = item.dataset.uid;
-                    const widgetConfig  = widgets[item.id]
+                    const widgetConfig  = widgets[item.dataset.name]
                     Utility.applyControl( widgetConfig, wrapperId )
                 })
                 // enable drag and drop 
@@ -226,7 +233,7 @@ class Customizer extends Sidebar {
                 
                 case 'widget': // when individual widget is clicked
                 jQuery('.aside-btn').removeClass('active');
-                self.createControls.call(self, this.id, this.dataset.uid);
+                self.createControls.call(self, this.dataset.name, this.dataset.uid);
                 break;
             }
 

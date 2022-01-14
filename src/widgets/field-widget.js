@@ -163,7 +163,7 @@ export default class FieldWidget extends ControlBase {
     
     render( wrapper_id ) {
         return `
-            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" id="field_widget" data-type="widget">
+            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" data-name="field_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <input class="email-field" type="email" placeholder="${this.input_placeholder.default}"/>

@@ -8,8 +8,18 @@
  function domReady() {
    
     const popup = {
+        
         init() {
             const self = this;
+            window.document.body.classList.add('popup-init');
+            document.head.insertAdjacentHTML("beforeend", `
+                <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">
+                <link rel="stylesheet" href="https://bookerkit.com/popup-host/public/popup.css">
+            `);
+
             fetch('https://bookerkit.com/popup-host/' + 'storage/index.php?public')
             .then( response => response.json())
             .then( response => {
@@ -23,35 +33,38 @@
         },
         
         insert() {
-            window.document.body.classList.add('popup-init');
-            document.head.insertAdjacentHTML("beforeend", ` <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">`)
-            document.head.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="https://fonts.googleapis.com">`)
-            document.head.insertAdjacentHTML("beforeend", `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>`)
-            document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap">`)
-            document.head.insertAdjacentHTML("beforeend", `<link rel="stylesheet" href="https://bookerkit.com/popup-host/public/popup.css">`)
+            
             document.head.insertAdjacentHTML("beforeend", `<style id="popup-css">${this.css}</style>`)
             document.body.insertAdjacentHTML("beforeend", this.html)
             
             setTimeout(()=>{
                 window.document.body.classList.add('show-popup');
-                const closeBtn = document.querySelector('.popup-close-button')
-                if( closeBtn ) {
-                    closeBtn.addEventListener('click', () => {
-                        window.document.body.classList.remove('show-popup');
-                    })
-                }
-                const submitBtn = document.querySelector('.submit-btn');
-                const emailField = document.querySelector('.email-field');
-                if( submitBtn &&  emailField ) {
-                    submitBtn.addEventListener('click', () => {
-                        const value = emailField.value
-                        alert(value)
-                    })
-                }
+                const closeBtn      = document.querySelectorAll('.popup-close-button')
+                const submitBtn     = document.querySelectorAll('.submit-btn');
+                const emailField    = document.querySelector('.email-field');
+
+                if( closeBtn ) this.closeButtonHandler( closeBtn  );
+                if( submitBtn &&  emailField ) this.submitButtonHandler(submitBtn, emailField)
             }, 1000 )
     
+        },
+
+        submitButtonHandler( btns, emailField ) {
+            btns.forEach( btn => {
+                btn.addEventListener('click', () => {
+                    const value = emailField.value
+                    alert(value)
+                })
+            })            
+        },
+
+        closeButtonHandler( btns ) {
+            btns.forEach( btn => {
+                btn.addEventListener('click', () => window.document.body.classList.remove('show-popup'))
+            })
         }
     }
+
     popup.init()
 }
 

@@ -87,6 +87,7 @@ export default class ControlBase {
                 value="${props.default}" 
                 data-key=${key} 
                 type="number" 
+                min="0"
                 class="popup-control--trigger"
             />`
         )

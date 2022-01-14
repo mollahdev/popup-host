@@ -149,7 +149,7 @@ export default class CloseButtonWidget extends ControlBase {
 
     render(wrapper_id) {
         return `
-            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" id="close_button_widget" data-type="widget">
+            <div class="popup-widget-element apb-${wrapper_id}" data-uid="${wrapper_id}" data-name="close_button_widget" data-type="widget">
                 <i class="remove-btn">x</i>
                 <div>
                     <span class="button popup-close-button">${this.button_content.default}</span>
