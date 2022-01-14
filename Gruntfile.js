@@ -14,7 +14,7 @@ module.exports = grunt => {
 	const projectConfig = {
 		name: 'popup-host', 						// should be the text domain of the project (todo: spilt it)
 		srcDir: './', 								// the source directory of the plugin
-		distDir: './build/',					// where to save the built files
+		distDir: './build/',						// where to save the built files
 		enableLint:	false, 							// ignore the linting (coding standard checking) during 'build' task (true/ false)
         version: '1.0.0'
 	};
@@ -314,7 +314,7 @@ screen: {
 │                                                                 │
 │                      All tasks completed.                       │
 │   Built files & Installable zip copied to the dist directory.   │
-│                        ~ Codiaum Team ~                         │
+│                        ~ A S H R A F ~                          │
 │                                                                 │
 ╰─────────────────────────────────────────────────────────────────╯
 `.green

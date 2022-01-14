@@ -37,6 +37,7 @@ export default class GlobalControls extends ControlBase {
             step:10,
             selector: function( wrapper, value ) {
                 return `${wrapper} .apb-wrapper {
+                    position: relative;
                     border-radius: ${value}px;
                 }`
             }

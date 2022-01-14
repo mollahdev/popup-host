@@ -3,6 +3,7 @@ import GlobalControls from "./inc/global-controls";
 import widgets from "./widgets";
 import state from "./inc/state";
 import cssom from "./inc/cssom";
+import Utility from "./inc/utility";
 
 
 class Customizer extends Sidebar {
@@ -17,6 +18,8 @@ class Customizer extends Sidebar {
      * 
      * Create controls for sidebar
      * @var GlobalControls returns the global controls settings
+     * @param type refers to the settings type = popup settings or widget settings
+     * @param uid refers to the widget wrapper id
      * 
      */ 
     createControls(type, uid) {
@@ -68,68 +71,22 @@ class Customizer extends Sidebar {
             })
         })
     }
-    
-
-    /**
-     * 
-     * 
-     * Create widget markup 
-     * this method is responsible for creating unique id for widget wrapper
-     * 
-     */ 
-    uid() {
-        let store = state.get();
-        const promise = new Promise((resolve, reject) => {
-            function generateUID() {
-                let uid = Math.floor((Math.random() * 10000) + 1);
-                if( Reflect.has( store, uid ) ) {
-                    generateUID();
-                } else {
-                    resolve(uid)
-                }
-            }
-            generateUID()
-        })
-        return promise;
-    }
 
     onDropWidget( widget, position ) {
-        this.uid().then( wrapperId => {
+        Utility.uid().then( wrapperId => {
             
-            /**
-             * 
-             * 
-             * @var name widget name
-             * @var id widget id
-             * @render function for creating markup 
-             * 
-             */ 
             const { name, id, render } = widget.widgetAttribute;
             state.add(wrapperId, {})
-            const data = state.get()[wrapperId];
 
             // generate markup 
             if( typeof render === 'function' ) {
                 const markup = render( wrapperId );
-
                 jQuery('.alpha-popup-builder .apb-wrapper').append(markup)
                 jQuery('.apb-' + wrapperId).css(position)
                 jQuery('.popup-widget-element').draggable({ containment: 'parent' })
-                jQuery('.panel--info').text(name);
-                
-                // generate style from default values
-                Object.entries( widget ).map(([prop, attr]) => {
-                    if( prop !== 'widgetAttribute' && attr.selector ) {
-                        // use default value
-                        data[prop] = attr.default;
-                        // generate css
-                        const initialStyle = attr.selector( '.apb-' + wrapperId, data[prop] );
-                        if( initialStyle ) {
-                            const { selector, style } = cssom.seperateStyle( initialStyle );
-                            cssom.insert(selector, style)
-                        }
-                    }
-                })
+                jQuery('.panel--info').text(name);                
+                Utility.applyControl( widget, wrapperId  ) // generate style from default values
+
             }
         }) // end of promise
     }
@@ -152,8 +109,14 @@ class Customizer extends Sidebar {
         container.droppable({
             accept: '.popup-widget', 
             drop: function( event, ui ) {
-                const type = ui.draggable.data('type');
-                self.onDropWidget( widgets[type], ui.position );
+                const parent    = jQuery(this).position();
+                const type      = ui.draggable.data('type');
+                const position  = {
+                    left: ui.position.left - parent.left,
+                    top: ui.position.top - parent.top,
+                }
+
+                self.onDropWidget( widgets[type], position );
             }
         });
     }
@@ -167,21 +130,11 @@ class Customizer extends Sidebar {
         jQuery(document).on('click', '.remove-btn', function(ev){
             ev.preventDefault();
             ev.stopPropagation();
-            const element = jQuery(this).parent();
-            const uid = element.data('uid')
-            const widgetId = element.attr('id');
-            const widget = widgets[widgetId]
-            const selector = new Set();
-            state.remove( uid )
-            Object.entries( widget ).map(([prop, attr]) => {
-                if( prop !== 'widgetAttribute' && attr.selector ) {
-                    const initialStyle = attr.selector( '.apb-' + uid, '' );
-                    if( initialStyle ) {
-                        selector.add( cssom.seperateStyle( initialStyle ).selector );
-                    }
-                }
-            })
-            cssom.delete( Array.from(selector) );
+            const element   = jQuery(this).parent();
+            const uid       = element.data('uid')
+            const widgetId  = element.attr('id');
+            const widget    = widgets[widgetId]
+            Utility.removeControl(widget, uid)
             element.remove();
         })
     }
@@ -212,25 +165,8 @@ class Customizer extends Sidebar {
                 jQuery('.popup-widget-element').each( (i, item) =>{
                     const wrapperId     = item.dataset.uid;
                     const widgetConfig  = widgets[item.id]
-                    const data          = state.get()[wrapperId];
-
-                     // generate style from default values
-                    Object.entries( widgetConfig ).map(([prop, attr]) => {
-                        if( prop !== 'widgetAttribute' && attr.selector ) {
-                            
-                            if( !Reflect.has( data, prop ) ) {
-                                data[prop] =  attr.default;
-                            }
-
-                            const initialStyle = attr.selector( '.apb-' + wrapperId, data[prop] );
-                            if( initialStyle ) {
-                                const { selector, style } = cssom.seperateStyle( initialStyle );
-                                cssom.insert(selector, style)
-                            }
-                        }
-                    })
+                    Utility.applyControl( widgetConfig, wrapperId )
                 })
-                
                 // enable drag and drop 
                 self.dropWidget( self );
                 jQuery('.popup-widget-element').draggable({ containment: 'parent' })

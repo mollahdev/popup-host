@@ -1,10 +1,22 @@
+/**
+ * 
+ * @file state
+ * this state object is responsible for managing unique uid and widget settings through out the application 
+ * 
+ */ 
+
+
 let STORAGE = {
     global: {}
 };
 
 const state = {
-    get() {
-        return STORAGE
+    get( target = false ) {
+        if( target ) {
+            return STORAGE[target]
+        } else {
+            return STORAGE
+        }
     },
     set( value ) {
         STORAGE = value;
